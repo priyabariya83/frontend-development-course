@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Fundamentals - Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            padding: 1rem 0 0.5rem 0;
+            border-bottom: 2px solid #3498db;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            color: #34495e;
+            margin-top: 1.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .example-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .live-example {
+            background-color: #e8f4fc;
+            border: 1px solid #b3e0ff;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            background-color: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255,255,255,0.3);
+        }
+        
+        .exercise {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .quiz {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            color: #7f8c8d;
+            border-top: 1px solid #ecf0f1;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>HTML Fundamentals - Complete Guide</h1>
+        <p class="subtitle">Day 1: All Concepts with Live Examples</p>
+        <nav>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#document-structure">Document Structure</a></li>
+                <li><a href="#basic-elements">Basic Elements</a></li>
+                <li><a href="#text-formatting">Text Formatting</a></li>
+                <li><a href="#links-navigation">Links</a></li>
+                <li><a href="#images-media">Images & Media</a></li>
+                <li><a href="#tables">Tables</a></li>
+                <li><a href="#forms">Forms</a></li>
+                <li><a href="#semantic-html">Semantic HTML</a></li>
+                <li><a href="#quiz">Quiz</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section id="introduction">
+            <h2>1. Introduction to HTML</h2>
+            <p><strong>HTML (HyperText Markup Language)</strong> is the standard markup language for creating web pages. It provides the structure of a webpage, while CSS adds styling and JavaScript adds interactivity.</p>
+            
+            <h3>Key Concepts:</h3>
+            <ul>
+                <li><strong>HyperText</strong>: Text that contains links to other texts</li>
+                <li><strong>Markup</strong>: System for annotating text to define structure</li>
+                <li><strong>Language</strong>: Has syntax rules like any programming language</li>
+            </ul>
+            
+            <h3>HTML Versions:</h3>
+            <ul>
+                <li>HTML 4.01 (1999)</li>
+                <li>XHTML (2000)</li>
+                <li>HTML5 (2014) - Current standard</li>
+            </ul>
+        </section>
+
+        <section id="document-structure">
+            <h2>2. HTML Document Structure</h2>
+            
+            <div class="example-box">
+                <h3>Basic HTML Template:</h3>
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Document Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Visible content goes here --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+            
+            <h3>Explanation of Each Part:</h3>
+            <ul>
+                <li><code>&lt;!DOCTYPE html&gt;</code>: Declares the document type and HTML version (must be first line)</li>
+                <li><code>&lt;html&gt;</code>: Root element of an HTML page, <code>lang</code> attribute defines language</li>
+                <li><code>&lt;head&gt;</code>: Contains metadata (title, character set, viewport, links to CSS/JS)</li>
+                <li><code>&lt;body&gt;</code>: Contains all visible content (all user-facing elements)</li>
+            </ul>
+            
+            <h3>Essential Meta Tags:</h3>
+            <div class="example-box">
+                <pre><code>&lt;head&gt;
+    &lt;!-- Character encoding --&gt;
+    &lt;meta charset="UTF-8"&gt;
+    
+    &lt;!-- For responsive design --&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    
+    &lt;!-- Page description for SEO --&gt;
+    &lt;meta name="description" content="Learn HTML fundamentals"&gt;
+    
+    &lt;!-- Keywords for SEO --&gt;
+    &lt;meta name="keywords" content="HTML, CSS, JavaScript, Web Development"&gt;
+    
+    &lt;!-- Author information --&gt;
+    &lt;meta name="author" content="Your Name"&gt;
+&lt;/head&gt;</code></pre>
+            </div>
+        </section>
+
+        <section id="basic-elements">
+            <h2>3. Basic HTML Elements</h2>
+            
+            <div class="live-example">
+                <h3>Headings (h1-h6) - Live Example:</h3>
+                <h1>Main Heading (Most Important) - h1</h1>
+                <h2>Secondary Heading - h2</h2>
+                <h3>Tertiary Heading - h3</h3>
+                <h4>Quaternary Heading - h4</h4>
+                <h5>Quinary Heading - h5</h5>
+                <h6>Smallest Heading - h6</h6>
+                
+                <h3>Paragraphs:</h3>
+                <p>This is a paragraph. It automatically adds spacing before and after.</p>
+                <p>This is another paragraph with <em>emphasis</em> and <strong>strong importance</strong>.</p>
+                
+                <h3>Horizontal Rule:</h3>
+                <p>Above the line</p>
+                <hr>
+                <p>Below the line</p>
+                
+                <h3>Line Break:</h3>
+                <p>First line<br>Second line<br>Third line</p>
+            </div>
+        </section>
+
+        <section id="text-formatting">
+            <h2>4. Text Formatting</h2>
+            
+            <div class="live-example">
+                <h3>Inline Text Elements - Live Examples:</h3>
+                <p>
+                    <b>Bold text</b> (without importance)<br>
+                    <strong>Strong text</strong> (with importance)<br>
+                    <i>Italic text</i> (without emphasis)<br>
+                    <em>Emphasized text</em> (with emphasis)<br>
+                    <mark>Highlighted text</mark><br>
+                    <small>Smaller text</small><br>
+                    <del>Deleted text</del><br>
+                    <ins>Inserted text</ins><br>
+                    H<sub>2</sub>O (Subscript) and x<sup>2</sup> (Superscript)<br>
+                    <code>Code snippet</code><br>
+                    <kbd>Keyboard input</kbd><br>
+                    <abbr title="HyperText Markup Language">HTML</abbr> (abbreviation)<br>
+                    <cite>Citation</cite><br>
+                    <q>Short quotation</q><br>
+                    <address>Contact information</address><br>
+                    <bdo dir="rtl">Right-to-left text</bdo>
+                </p>
+                
+                <h3>Blockquote Example:</h3>
+                <blockquote>
+                    This is a long quotation that is set apart from the main text.
+                    It's typically used for quoting passages from another source.
+                </blockquote>
+                
+                <h3>Special Characters:</h3>
+                <p>
+                    &lt; = Less than (&lt;)<br>
+                    &gt; = Greater than (&gt;)<br>
+                    &amp; = Ampersand (&amp;)<br>
+                    &quot; = Quotation mark (")<br>
+                    &apos; = Apostrophe (')<br>
+                    &nbsp; = Non-breaking space<br>
+                    &copy; = Copyright (©)<br>
+                    &reg; = Registered trademark (®)<br>
+                    &trade; = Trademark (™)<br>
+                    &euro; = Euro (€)<br>
+                    &pound; = Pound (£)
+                </p>
+            </div>
+        </section>
+
+        <section id="links-navigation">
+            <h2>5. Links and Navigation</h2>
+            
+            <div class="live-example">
+                <h3>Basic Links - Live Examples:</h3>
+                <p>
+                    <a href="https://www.example.com">Visit Example (Absolute URL)</a><br>
+                    <a href="#images-media">Jump to Images & Media Section (Same Page)</a><br>
+                    <a href="mailto:email@example.com">Email Us</a><br>
+                    <a href="tel:+1234567890">Call Us: +1 234 567 890</a><br>
+                    <a href="https://www.example.com" target="_blank" rel="noopener noreferrer">Open in New Tab</a>
+                </p>
+                
+                <h3>Navigation Menu Example:</h3>
+                <nav>
+                    <ul>
+                        <li><a href="#introduction">Home</a></li>
+                        <li><a href="#document-structure">About</a></li>
+                        <li><a href="#forms">Services</a></li>
+                        <li><a href="#contact-form">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </section>
+
+        <section id="images-media">
+            <h2>6. Images and Media</h2>
+            
+            <div class="live-example">
+                <h3>Basic Image:</h3>
+                <img src="https://via.placeholder.com/300x150/4b6cb7/ffffff?text=Sample+Image" alt="Sample placeholder image" width="300" height="150">
+                
+                <h3>Responsive Images with Picture Element:</h3>
+                <picture>
+                    <source media="(min-width: 1200px)" srcset="https://via.placeholder.com/800x400">
+                    <source media="(min-width: 768px)" srcset="https://via.placeholder.com/600x300">
+                    <img src="https://via.placeholder.com/400x200" alt="Responsive image example" style="width:100%; max-width:400px;">
+                </picture>
+                
+                <h3>Audio Element:</h3>
+                <audio controls>
+                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                
+                <h3>Video Element:</h3>
+                <video width="320" height="240" controls poster="https://via.placeholder.com/320x240">
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <section id="lists">
+            <h2>7. Lists</h2>
+            
+            <div class="live-example">
+                <h3>Unordered List (Bulleted):</h3>
+                <ul>
+                    <li>First item</li>
+                    <li>Second item</li>
+                    <li>Third item</li>
+                </ul>
+                
+                <h3>Ordered List (Numbered):</h3>
+                <ol>
+                    <li>First step</li>
+                    <li>Second step</li>
+                    <li>Third step</li>
+                </ol>
+                
+                <h3>Ordered List Types:</h3>
+                <ol type="A">
+                    <li>Uppercase letters</li>
+                    <li>Second item</li>
+                </ol>
+                
+                <ol type="i" start="5">
+                    <li>Lowercase Roman starting at 5</li>
+                    <li>Sixth item</li>
+                </ol>
+                
+                <h3>Description List:</h3>
+                <dl>
+                    <dt>HTML</dt>
+                    <dd>HyperText Markup Language</dd>
+                    <dt>CSS</dt>
+                    <dd>Cascading Style Sheets</dd>
+                    <dt>JS</dt>
+                    <dd>JavaScript</dd>
+                </dl>
+                
+                <h3>Nested Lists:</h3>
+                <ul>
+                    <li>Fruits
+                        <ul>
+                            <li>Apples</li>
+                            <li>Oranges</li>
+                        </ul>
+                    </li>
+                    <li>Vegetables
+                        <ul>
+                            <li>Carrots</li>
+                            <li>Broccoli</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="tables">
+            <h2>8. Tables</h2>
+            
+            <div class="live-example">
+                <h3>Basic Table:</h3>
+                <table border="1">
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>City</th>
+                    </tr>
+                    <tr>
+                        <td>John</td>
+                        <td>25</td>
+                        <td>New York</td>
+                    </tr>
+                    <tr>
+                        <td>Sarah</td>
+                        <td>30</td>
+                        <td>London</td>
+                    </tr>
+                </table>
+                
+                <h3>Advanced Table with Semantic Elements:</h3>
+                <table>
+                    <caption>Student Grades</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Student</th>
+                            <th scope="col">Math</th>
+                            <th scope="col">Science</th>
+                            <th scope="col">English</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Alice</th>
+                            <td>95</td>
+                            <td>88</td>
+                            <td>92</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Bob</th>
+                            <td>85</td>
+                            <td>90</td>
+                            <td>87</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th scope="row">Average</th>
+                            <td>90</td>
+                            <td>89</td>
+                            <td>89.5</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                
+                <h3>Table with Rowspan and Colspan:</h3>
+                <table border="1">
+                    <tr>
+                        <th rowspan="2">Name</th>
+                        <th colspan="2">Marks</th>
+                    </tr>
+                    <tr>
+                        <th>Theory</th>
+                        <th>Practical</th>
+                    </tr>
+                    <tr>
+                        <td>John</td>
+                        <td>85</td>
+                        <td>90</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section id="forms">
+            <h2>9. Forms</h2>
+            
+            <div class="live-example">
+                <h3>Basic Form Structure:</h3>
+                <form action="#" method="POST">
+                    <div style="margin-bottom: 15px;">
+                        <label for="username">Username:</label><br>
+                        <input type="text" id="username" name="username" required maxlength="20" placeholder="Enter username">
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label for="email">Email:</label><br>
+                        <input type="email" id="email" name="email" required placeholder="you@example.com">
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label for="password">Password:</label><br>
+                        <input type="password" id="password" name="password" minlength="8" required>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label for="age">Age:</label><br>
+                        <input type="number" id="age" name="age" min="1" max="120" value="25">
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label for="volume">Volume:</label><br>
+                        <input type="range" id="volume" name="volume" min="0" max="100" value="50">
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label for="birthday">Birthday:</label><br>
+                        <input type="date" id="birthday" name="birthday">
+                    </div>
+                    
+                    <fieldset style="margin-bottom: 15px; padding: 10px;">
+                        <legend>Gender:</legend>
+                        <label>
+                            <input type="radio" name="gender" value="male" required> Male
+                        </label><br>
+                        <label>
+                            <input type="radio" name="gender" value="female"> Female
+                        </label><br>
+                        <label>
+                            <input type="radio" name="gender" value="other"> Other
+                        </label>
+                    </fieldset>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label>
+                            <input type="checkbox" name="subscribe" value="newsletter" checked> Subscribe to newsletter
+                        </label>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label for="country">Country:</label><br>
+                        <select id="country" name="country">
+                            <option value="">Select a country</option>
+                            <option value="us">United States</option>
+                            <option value="ca">Canada</option>
+                            <option value="uk">United Kingdom</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label for="message">Message:</label><br>
+                        <textarea id="message" name="message" rows="4" cols="50" placeholder="Enter your message here..."></textarea>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label for="color">Favorite Color:</label><br>
+                        <input type="color" id="color" name="color" value="#ff0000">
+                    </div>
+                    
+                    <button type="submit">Submit Form</button>
+                    <button type="reset">Reset Form</button>
+                </form>
+            </div>
+            
+            <div class="example-box" id="contact-form">
+                <h3>Complete Contact Form Example Code:</h3>
+                <pre><code>&lt;form action="/contact" method="POST"&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Contact Information&lt;/legend&gt;
+        
+        &lt;div&gt;
+            &lt;label for="name"&gt;Full Name:&lt;/label&gt;
+            &lt;input type="text" id="name" name="name" required&gt;
+        &lt;/div&gt;
+        
+        &lt;div&gt;
+            &lt;label for="email"&gt;Email:&lt;/label&gt;
+            &lt;input type="email" id="email" name="email" required&gt;
+        &lt;/div&gt;
+        
+        &lt;fieldset&gt;
+            &lt;legend&gt;Your Message&lt;/legend&gt;
+            
+            &lt;div&gt;
+                &lt;label for="subject"&gt;Subject:&lt;/label&gt;
+                &lt;select id="subject" name="subject" required&gt;
+                    &lt;option value=""&gt;Select a subject&lt;/option&gt;
+                    &lt;option value="general"&gt;General Inquiry&lt;/option&gt;
+                    &lt;option value="support"&gt;Technical Support&lt;/option&gt;
+                &lt;/select&gt;
+            &lt;/div&gt;
+            
+            &lt;div&gt;
+                &lt;label for="message"&gt;Message:&lt;/label&gt;
+                &lt;textarea id="message" name="message" rows="5" required&gt;&lt;/textarea&gt;
+            &lt;/div&gt;
+        &lt;/fieldset&gt;
+        
+        &lt;button type="submit"&gt;Send Message&lt;/button&gt;
+        &lt;button type="reset"&gt;Clear Form&lt;/button&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt;</code></pre>
+            </div>
+        </section>
+
+        <section id="semantic-html">
+            <h2>10. Semantic HTML</h2>
+            
+            <div class="live-example">
+                <h3>Why Semantic HTML?</h3>
+                <ul>
+                    <li>Better accessibility</li>
+                    <li>Improved SEO</li>
+                    <li>Easier maintenance</li>
+                    <li>Clearer code structure</li>
+                </ul>
+                
+                <h3>Semantic Page Structure Example:</h3>
+                
+                <header style="background-color: #e0e0e0; padding: 1rem; margin-bottom: 1rem;">
+                    <h1 style="margin: 0;">Website Title</h1>
+                    <nav>Main Navigation</nav>
+                </header>
+                
+                <main style="background-color: #f5f5f5; padding: 1rem; margin-bottom: 1rem;">
+                    <article style="background-color: white; padding: 1rem; margin-bottom: 1rem;">
+                        <header>
+                            <h2>Article Title</h2>
+                            <p>Published on <time datetime="2024-01-15">Jan 15, 2024</time></p>
+                        </header>
+                        
+                        <section>
+                            <h3>Introduction</h3>
+                            <p>Article content goes here. Semantic HTML makes the structure clear.</p>
+                        </section>
+                        
+                        <section>
+                            <h3>Conclusion</h3>
+                            <p>Final thoughts on the topic.</p>
+                        </section>
+                        
+                        <footer>
+                            <p>Article footer with tags or author info</p>
+                        </footer>
+                    </article>
+                    
+                    <aside style="background-color: #e8f5e8; padding: 1rem;">
+                        <h3>Related Articles</h3>
+                        <p>Sidebar content related to the main article</p>
+                    </aside>
+                </main>
+                
+                <footer style="background-color: #333; color: white; padding: 1rem; text-align: center;">
+                    <p>&copy; 2024 My Website</p>
+                    <address>Contact: email@example.com</address>
+                </footer>
+                
+                <h3>Common Semantic Elements:</h3>
+                <table>
+                    <tr>
+                        <th>Element</th>
+                        <th>Purpose</th>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;header&gt;</code></td>
+                        <td>Introductory content or navigation</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;nav&gt;</code></td>
+                        <td>Navigation links</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;main&gt;</code></td>
+                        <td>Main content of the document</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;article&gt;</code></td>
+                        <td>Independent, self-contained content</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;section&gt;</code></td>
+                        <td>Thematic grouping of content</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;aside&gt;</code></td>
+                        <td>Content tangentially related to main content</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;footer&gt;</code></td>
+                        <td>Footer for its nearest ancestor</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section id="best-practices">
+            <h2>11. HTML Best Practices</h2>
+            
+            <div class="example-box">
+                <h3>1. Document Structure:</h3>
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Descriptive Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Content --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                
+                <h3>2. Use Semantic Elements:</h3>
+                <p><strong>Bad:</strong> <code>&lt;div id="header"&gt;</code></p>
+                <p><strong>Good:</strong> <code>&lt;header&gt;</code></p>
+                
+                <h3>3. Proper Heading Hierarchy:</h3>
+                <p><strong>Bad:</strong> <code>&lt;h1&gt;Title&lt;/h1&gt; &lt;h3&gt;Subtitle&lt;/h3&gt;</code> (Skipped h2)</p>
+                <p><strong>Good:</strong> <code>&lt;h1&gt;Title&lt;/h1&gt; &lt;h2&gt;Subtitle&lt;/h2&gt; &lt;h3&gt;Section&lt;/h3&gt;</code></p>
+                
+                <h3>4. Image Accessibility:</h3>
+                <p><strong>Bad:</strong> <code>&lt;img src="photo.jpg"&gt;</code></p>
+                <p><strong>Good:</strong> <code>&lt;img src="photo.jpg" alt="Two people working on laptops at a coffee shop"&gt;</code></p>
+                
+                <h3>5. Form Best Practices:</h3>
+                <p><strong>Bad:</strong> <code>&lt;input type="text"&gt;</code></p>
+                <p><strong>Good:</strong> <code>&lt;label for="username"&gt;Username:&lt;/label&gt; &lt;input type="text" id="username" name="username"&gt;</code></p>
+            </div>
+        </section>
+
+        <section id="exercises">
+            <h2>12. Exercises and Projects</h2>
+            
+            <div class="exercise">
+                <h3>Exercise 1: Basic Web Page</h3>
+                <p>Create a personal introduction page with:</p>
+                <ul>
+                    <li>Proper HTML structure</li>
+                    <li>Headings (h1, h2, h3)</li>
+                    <li>Paragraphs with text formatting</li>
+                    <li>An image</li>
+                    <li>A list of your hobbies</li>
+                    <li>Contact information</li>
+                </ul>
+            </div>
+            
+            <div class="exercise">
+                <h3>Exercise 2: Restaurant Menu</h3>
+                <p>Create a restaurant menu page with:</p>
+                <ul>
+                    <li>Restaurant name and logo</li>
+                    <li>Menu sections (Appetizers, Main Course, Desserts)</li>
+                    <li>Tables with prices</li>
+                    <li>Contact form for reservations</li>
+                    <li>Footer with address</li>
+                </ul>
+            </div>
+            
+            <div class="exercise">
+                <h3>Project: Personal Portfolio</h3>
+                <p>Build a complete portfolio website with:</p>
+                <ul>
+                    <li><strong>Home Page:</strong> Hero section, skills, projects</li>
+                    <li><strong>About Page:</strong> Biography, education, experience</li>
+                    <li><strong>Projects Page:</strong> Project cards with images and links</li>
+                    <li><strong>Contact Page:</strong> Contact form, social media links</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="quiz">
+            <h2>13. Quiz</h2>
+            
+            <div class="quiz">
+                <h3>Multiple Choice Questions:</h3>
+                <ol>
+                    <li>What does HTML stand for?
+                        <ol type="a">
+                            <li>Hyper Text Markup Language</li>
+                            <li>High Tech Modern Language</li>
+                            <li>Hyper Transfer Markup Language</li>
+                            <li>Home Tool Markup Language</li>
+                        </ol>
+                    </li>
+                    <li>Which element is used for the largest heading?
+                        <ol type="a">
+                            <li>&lt;h6&gt;</li>
+                            <li>&lt;head&gt;</li>
+                            <li>&lt;h1&gt;</li>
+                            <li>&lt;heading&gt;</li>
+                        </ol>
+                    </li>
+                    <li>What is the correct HTML for creating a hyperlink?
+                        <ol type="a">
+                            <li>&lt;a url="http://www.example.com"&gt;Example&lt;/a&gt;</li>
+                            <li>&lt;a href="http://www.example.com"&gt;Example&lt;/a&gt;</li>
+                            <li>&lt;a&gt;http://www.example.com&lt;/a&gt;</li>
+                            <li>&lt;link&gt;http://www.example.com&lt;/link&gt;</li>
+                        </ol>
+                    </li>
+                    <li>Which attribute is required for images?
+                        <ol type="a">
+                            <li>title</li>
+                            <li>src</li>
+                            <li>alt</li>
+                            <li>width</li>
+                        </ol>
+                    </li>
+                </ol>
+                
+                <h3>True or False:</h3>
+                <ol>
+                    <li>HTML is a programming language. (False)</li>
+                    <li>You should only use one &lt;h1&gt; per page. (True)</li>
+                    <li>&lt;div&gt; is a semantic element. (False)</li>
+                    <li>HTML comments start with &lt;!-- and end with --&gt;. (True)</li>
+                    <li>The &lt;head&gt; element contains visible content. (False)</li>
+                </ol>
+                
+                <h3>Answers:</h3>
+                <p>Multiple Choice: 1. a, 2. c, 3. b, 4. b (src is required, alt is highly recommended)</p>
+            </div>
+        </section>
+
+        <section id="resources">
+            <h2>14. Resources</h2>
+            
+            <h3>Online Validators:</h3>
+            <ul>
+                <li><a href="https://validator.w3.org/" target="_blank">W3C HTML Validator</a></li>
+                <li><a href="https://html5.validator.nu/" target="_blank">Nu HTML Checker</a></li>
+            </ul>
+            
+            <h3>Documentation:</h3>
+            <ul>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">MDN Web Docs - HTML</a></li>
+                <li><a href="https://html.spec.whatwg.org/" target="_blank">HTML Living Standard</a></li>
+                <li><a href="https://www.w3schools.com/html/" target="_blank">W3Schools HTML Tutorial</a></li>
+            </ul>
+            
+            <h3>Quick Reference:</h3>
+            <table>
+                <tr>
+                    <th>Element</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td><code>&lt;h1&gt; - &lt;h6&gt;</code></td>
+                    <td>Headings</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;p&gt;</code></td>
+                    <td>Paragraph</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;a&gt;</code></td>
+                    <td>Link</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;img&gt;</code></td>
+                    <td>Image</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;</code></td>
+                    <td>Lists</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;table&gt;, &lt;tr&gt;, &lt;td&gt;</code></td>
+                    <td>Table</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;form&gt;, &lt;input&gt;</code></td>
+                    <td>Form</td>
+                </tr>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>Congratulations on completing HTML Fundamentals!</strong></p>
+        <p>You've learned the foundation of web development. Keep practicing and building!</p>
+        <p>This guide covers all concepts from the PDF with live examples.</p>
+        <p>Date: <time datetime="2024-01-25">January 25, 2024</time></p>
+    </footer>
+</body>
+</html>
