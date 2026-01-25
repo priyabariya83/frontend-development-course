@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Fundamentals - Complete Guide</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            /* Colors */
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --text-color: #333;
+            --text-light: #777;
+            --white: #ffffff;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+            
+            /* Typography */
+            --font-main: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+            --font-size-base: 16px;
+            --line-height: 1.6;
+            
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            
+            /* Layout */
+            --max-width: 1200px;
+            --gutter: 2rem;
+        }
+        
+        /* Dark Theme */
+        [data-theme="dark"] {
+            --primary-color: #2980b9;
+            --secondary-color: #27ae60;
+            --accent-color: #c0392b;
+            --dark-color: #1a252f;
+            --light-color: #34495e;
+            --text-color: #ecf0f1;
+            --text-light: #bdc3c7;
+            --white: #2c3e50;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-main);
+            font-size: var(--font-size-base);
+            line-height: var(--line-height);
+            color: var(--text-color);
+            background-color: var(--white);
+            transition: var(--transition);
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-sm);
+            position: relative;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-lg);
+            position: relative;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* Theme Toggle */
+        .theme-toggle {
+            position: absolute;
+            top: var(--spacing-lg);
+            right: var(--spacing-lg);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(30deg);
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--gutter);
+        }
+        
+        section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-xs);
+            border-bottom: 3px solid var(--light-color);
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+            margin: var(--spacing-md) 0 var(--spacing-sm);
+            font-size: 1.4rem;
+        }
+        
+        /* Example Boxes */
+        .example-box {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--primary-color);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            overflow-x: auto;
+        }
+        
+        .live-example {
+            background-color: rgba(52, 152, 219, 0.05);
+            border: 2px dashed var(--primary-color);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border-radius: var(--border-radius);
+        }
+        
+        .demo-box {
+            padding: var(--spacing-md);
+            background: white;
+            border-radius: calc(var(--border-radius) - 2px);
+            margin: var(--spacing-sm) 0;
+        }
+        
+        /* Code Styling */
+        code {
+            font-family: var(--font-mono);
+            background-color: rgba(0, 0, 0, 0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            margin: var(--spacing-sm) 0;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .comment {
+            color: #888;
+        }
+        
+        .selector {
+            color: #f92672;
+        }
+        
+        .property {
+            color: #66d9ef;
+        }
+        
+        .value {
+            color: #a6e22e;
+        }
+        
+        /* Flex & Grid Examples */
+        .flex-container, .grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .flex-demo {
+            display: flex;
+            background-color: var(--light-color);
+            padding: var(--spacing-sm);
+            border-radius: var(--border-radius);
+            min-height: 150px;
+        }
+        
+        .flex-item {
+            background-color: var(--primary-color);
+            color: white;
+            padding: var(--spacing-md);
+            border-radius: calc(var(--border-radius) - 2px);
+            text-align: center;
+            flex: 1;
+            min-width: 80px;
+            transition: var(--transition);
+        }
+        
+        .flex-item:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.05);
+        }
+        
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-sm);
+            background-color: var(--light-color);
+            padding: var(--spacing-sm);
+            border-radius: var(--border-radius);
+        }
+        
+        .grid-item {
+            background-color: var(--accent-color);
+            color: white;
+            padding: var(--spacing-md);
+            border-radius: calc(var(--border-radius) - 2px);
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .grid-item:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        /* Button Examples */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            margin: 5px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Form Examples */
+        .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: var(--font-main);
+            transition: var(--transition);
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        /* Animation Examples */
+        .animation-demo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+            background-color: var(--light-color);
+            border-radius: var(--border-radius);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .animated-box {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            border-radius: calc(var(--border-radius) - 2px);
+        }
+        
+        /* Exercise & Quiz Sections */
+        .exercise {
+            background-color: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid var(--secondary-color);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .quiz {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--spacing-md) 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--light-color);
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+            background-color: var(--dark-color);
+            color: white;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .theme-toggle {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin: var(--spacing-sm) auto;
+            }
+            
+            section {
+                padding: var(--spacing-md);
+            }
+        }
+        
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .mt-1 { margin-top: var(--spacing-xs); }
+        .mt-2 { margin-top: var(--spacing-sm); }
+        .mt-3 { margin-top: var(--spacing-md); }
+        .mb-1 { margin-bottom: var(--spacing-xs); }
+        .mb-2 { margin-bottom: var(--spacing-sm); }
+        .mb-3 { margin-bottom: var(--spacing-md); }
+        .p-1 { padding: var(--spacing-xs); }
+        .p-2 { padding: var(--spacing-sm); }
+        .p-3 { padding: var(--spacing-md); }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--light-color);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+        
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <header>
+        <h1>CSS Fundamentals - Complete Guide</h1>
+        <p class="subtitle">Day 2: All Concepts with Live, Interactive Examples</p>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+            <i class="fas fa-moon"></i>
+        </button>
+        <nav>
+            <a href="#introduction">Introduction</a>
+            <a href="#syntax-structure">Syntax</a>
+            <a href="#selectors">Selectors</a>
+            <a href="#colors-backgrounds">Colors</a>
+            <a href="#typography">Typography</a>
+            <a href="#box-model">Box Model</a>
+            <a href="#display-property">Display</a>
+            <a href="#positioning">Positioning</a>
+            <a href="#flexbox">Flexbox</a>
+            <a href="#responsive-design">Responsive</a>
+            <a href="#css-variables">Variables</a>
+            <a href="#transitions-animations">Animations</a>
+            <a href="#exercises">Exercises</a>
+            <a href="#quiz">Quiz</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- 1. Introduction to CSS -->
+        <section id="introduction">
+            <h2>1. Introduction to CSS</h2>
+            <p><strong>CSS (Cascading Style Sheets)</strong> is a stylesheet language used to describe the presentation of HTML documents. It controls how elements look on the page.</p>
+            
+            <h3>Key Concepts:</h3>
+            <ul>
+                <li><strong>Cascading</strong>: Multiple styles can apply, with rules determining priority</li>
+                <li><strong>Style</strong>: Visual appearance (colors, fonts, layout)</li>
+                <li><strong>Sheets</strong>: Can be external files or embedded in HTML</li>
+            </ul>
+            
+            <h3>What CSS Can Do:</h3>
+            <div class="flex-container">
+                <div class="demo-box">
+                    <h4><i class="fas fa-layer-group"></i> Layout & Positioning</h4>
+                    <p>Control element placement and flow</p>
+                </div>
+                <div class="demo-box">
+                    <h4><i class="fas fa-palette"></i> Colors & Backgrounds</h4>
+                    <p>Set colors, gradients, and images</p>
+                </div>
+                <div class="demo-box">
+                    <h4><i class="fas fa-font"></i> Typography & Text</h4>
+                    <p>Style fonts, sizes, and spacing</p>
+                </div>
+                <div class="demo-box">
+                    <h4><i class="fas fa-magic"></i> Animations & Transitions</h4>
+                    <p>Create movement and effects</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. CSS Syntax and Structure -->
+        <section id="syntax-structure">
+            <h2>2. CSS Syntax and Structure</h2>
+            
+            <div class="example-box">
+                <h3>Basic CSS Rule:</h3>
+                <pre><code><span class="selector">selector</span> {
+    <span class="property">property</span>: <span class="value">value</span>;
+    <span class="property">property</span>: <span class="value">value</span>;
+}</code></pre>
+            </div>
+            
+            <div class="live-example">
+                <h3>Live Example:</h3>
+                <div id="syntaxDemo" style="color: blue; font-size: 24px; text-align: center; padding: 20px; background: #f0f0f0; border-radius: 8px;">
+                    This element is styled with CSS: color: blue; font-size: 24px; text-align: center;
+                </div>
+                <div class="mt-2">
+                    <button class="btn btn-primary" onclick="document.getElementById('syntaxDemo').style.color='red'">Change to Red</button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('syntaxDemo').style.fontSize='32px'">Increase Font Size</button>
+                    <button class="btn btn-outline" onclick="document.getElementById('syntaxDemo').style.textAlign='left'">Align Left</button>
+                </div>
+            </div>
+            
+            <h3>Comments in CSS:</h3>
+            <pre><code><span class="comment">/* This is a single-line comment */</span>
+
+<span class="comment">/*
+This is a
+multi-line
+comment
+*/</span></code></pre>
+        </section>
+
+        <!-- 3. Ways to Add CSS -->
+        <section id="adding-css">
+            <h2>3. Ways to Add CSS</h2>
+            
+            <div class="example-box">
+                <h3>Method 1: Inline CSS (Not Recommended)</h3>
+                <pre><code>&lt;h1 style="color: red; font-size: 24px;"&gt;Heading&lt;/h1&gt;</code></pre>
+                
+                <h3>Method 2: Internal/Embedded CSS</h3>
+                <pre><code>&lt;head&gt;
+    &lt;style&gt;
+        h1 {
+            color: blue;
+            font-family: Arial;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;</code></pre>
+                
+                <h3>Method 3: External CSS (Recommended)</h3>
+                <pre><code>&lt;head&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;</code></pre>
+            </div>
+            
+            <h3>CSS Priority (Specificity):</h3>
+            <ol>
+                <li><strong>Inline styles</strong> (style attribute) - Highest priority</li>
+                <li><strong>ID selectors</strong> (#id)</li>
+                <li><strong>Class selectors</strong> (.class)</li>
+                <li><strong>Element selectors</strong> (p, div, h1)</li>
+                <li><strong>Browser default styles</strong> - Lowest priority</li>
+            </ol>
+        </section>
+
+        <!-- 4. CSS Selectors -->
+        <section id="selectors">
+            <h2>4. CSS Selectors</h2>
+            
+            <div class="example-box">
+                <h3>Basic Selectors:</h3>
+                <pre><code><span class="comment">/* Element Selector */</span>
+<span class="selector">p</span> { <span class="property">color</span>: <span class="value">#333</span>; }
+
+<span class="comment">/* Class Selector */</span>
+<span class="selector">.highlight</span> { <span class="property">background-color</span>: <span class="value">yellow</span>; }
+
+<span class="comment">/* ID Selector */</span>
+<span class="selector">#header</span> { <span class="property">background</span>: <span class="value">navy</span>; }
+
+<span class="comment">/* Universal Selector */</span>
+<span class="selector">*</span> { <span class="property">box-sizing</span>: <span class="value">border-box</span>; }</code></pre>
+            </div>
+            
+            <div class="live-example">
+                <h3>Pseudo-classes Demo:</h3>
+                <div class="demo-box">
+                    <a href="#" class="pseudo-demo">Hover over this link</a>
+                    <p class="pseudo-demo">First paragraph</p>
+                    <p class="pseudo-demo">Second paragraph</p>
+                    <p class="pseudo-demo">Third paragraph</p>
+                </div>
+                <style>
+                    .pseudo-demo {
+                        transition: all 0.3s ease;
+                    }
+                    .pseudo-demo:hover {
+                        color: var(--primary-color);
+                        transform: translateX(10px);
+                    }
+                    .pseudo-demo:first-child {
+                        font-weight: bold;
+                    }
+                    .pseudo-demo:nth-child(even) {
+                        background-color: rgba(52, 152, 219, 0.1);
+                    }
+                </style>
+            </div>
+            
+            <h3>Specificity Calculation:</h3>
+            <table>
+                <tr>
+                    <th>Selector Type</th>
+                    <th>Specificity Value</th>
+                </tr>
+                <tr>
+                    <td>Inline styles</td>
+                    <td>1000</td>
+                </tr>
+                <tr>
+                    <td>ID selectors</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>Class/pseudo-class selectors</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>Element/pseudo-element selectors</td>
+                    <td>1</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 5. Colors and Backgrounds -->
+        <section id="colors-backgrounds">
+            <h2>5. Colors and Backgrounds</h2>
+            
+            <div class="example-box">
+                <h3>Color Values:</h3>
+                <pre><code><span class="comment">/* Named Colors */</span>
+<span class="property">color</span>: <span class="value">red</span>;
+<span class="property">color</span>: <span class="value">blue</span>;
+
+<span class="comment">/* Hexadecimal */</span>
+<span class="property">color</span>: <span class="value">#ff0000</span>; <span class="comment">/* Red */</span>
+<span class="property">color</span>: <span class="value">#00ff00</span>; <span class="comment">/* Green */</span>
+<span class="property">color</span>: <span class="value">#0000ff</span>; <span class="comment">/* Blue */</span>
+
+<span class="comment">/* RGB/RGBA */</span>
+<span class="property">color</span>: <span class="value">rgb(255, 0, 0)</span>; <span class="comment">/* Red */</span>
+<span class="property">color</span>: <span class="value">rgba(255, 0, 0, 0.5)</span>; <span class="comment">/* 50% opaque red */</span>
+
+<span class="comment">/* HSL/HSLA */</span>
+<span class="property">color</span>: <span class="value">hsl(0, 100%, 50%)</span>; <span class="comment">/* Red */</span>
+<span class="property">color</span>: <span class="value">hsla(240, 100%, 50%, 0.3)</span>; <span class="comment">/* 30% opaque blue */</span></code></pre>
+            </div>
+            
+            <div class="live-example">
+                <h3>Gradient Examples:</h3>
+                <div class="flex-container">
+                    <div style="flex:1; height:100px; background:linear-gradient(to right, red, yellow); border-radius:8px;"></div>
+                    <div style="flex:1; height:100px; background:linear-gradient(45deg, #667eea, #764ba2); border-radius:8px;"></div>
+                    <div style="flex:1; height:100px; background:radial-gradient(circle, red, yellow, green); border-radius:8px;"></div>
+                </div>
+            </div>
+            
+            <h3>Opacity vs RGBA:</h3>
+            <div class="flex-container">
+                <div style="flex:1; padding:20px; background:#3498db; opacity:0.5; border-radius:8px; color:white; text-align:center;">
+                    opacity: 0.5<br>(affects entire element)
+                </div>
+                <div style="flex:1; padding:20px; background:rgba(52, 152, 219, 0.5); border-radius:8px; color:black; text-align:center;">
+                    rgba(52,152,219,0.5)<br>(affects only background)
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Typography and Text Styling -->
+        <section id="typography">
+            <h2>6. Typography and Text Styling</h2>
+            
+            <div class="example-box">
+                <h3>Font Properties:</h3>
+                <pre><code><span class="selector">.text</span> {
+    <span class="comment">/* Font Family */</span>
+    <span class="property">font-family</span>: <span class="value">'Arial', 'Helvetica', sans-serif</span>;
+    
+    <span class="comment">/* Font Size */</span>
+    <span class="property">font-size</span>: <span class="value">16px</span>; <span class="comment">/* Pixels */</span>
+    <span class="property">font-size</span>: <span class="value">1rem</span>; <span class="comment">/* Root em */</span>
+    
+    <span class="comment">/* Font Weight */</span>
+    <span class="property">font-weight</span>: <span class="value">400</span>; <span class="comment">/* Normal */</span>
+    <span class="property">font-weight</span>: <span class="value">bold</span>;
+    
+    <span class="comment">/* Line Height */</span>
+    <span class="property">line-height</span>: <span class="value">1.6</span>; <span class="comment">/* Unitless */</span>
+}</code></pre>
+            </div>
+            
+            <div class="live-example">
+                <h3>Text Styling Examples:</h3>
+                <div class="demo-box">
+                    <p style="text-align: left;">Left Aligned Text</p>
+                    <p style="text-align: center;">Center Aligned Text</p>
+                    <p style="text-align: right;">Right Aligned Text</p>
+                    <p style="text-transform: uppercase;">uppercase text</p>
+                    <p style="text-transform: lowercase;">LOWERCASE TEXT</p>
+                    <p style="text-transform: capitalize;">capitalized text</p>
+                    <p style="letter-spacing: 2px;">Letter Spacing</p>
+                    <p style="word-spacing: 10px;">Word Spacing</p>
+                    <p style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Text Shadow</p>
+                </div>
+            </div>
+            
+            <h3>Web Fonts (Google Fonts):</h3>
+            <div style="font-family: 'Roboto Mono', monospace; padding: 20px; background: #f0f0f0; border-radius: 8px;">
+                This text uses Google Fonts (Roboto Mono)
+            </div>
+        </section>
+
+        <!-- 7. The Box Model -->
+        <section id="box-model">
+            <h2>7. The Box Model</h2>
+            
+            <div style="text-align: center; margin: var(--spacing-md) 0;">
+                <div style="display: inline-block; position: relative; padding: 40px; background: var(--light-color); border-radius: var(--border-radius);">
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 2px solid var(--accent-color); border-radius: var(--border-radius); pointer-events: none;"></div>
+                    <div style="position: absolute; top: 20px; left: 20px; width: calc(100% - 40px); height: calc(100% - 40px); border: 2px solid var(--secondary-color); border-radius: calc(var(--border-radius) - 2px); pointer-events: none;"></div>
+                    <div style="background: var(--primary-color); color: white; padding: 30px; border-radius: calc(var(--border-radius) - 4px);">Content</div>
+                    <div style="position: absolute; top: 10px; left: -30px; color: var(--accent-color);">Margin</div>
+                    <div style="position: absolute; top: 30px; left: -10px; color: var(--secondary-color);">Border</div>
+                    <div style="position: absolute; top: 50px; left: 10px; color: var(--primary-color);">Padding</div>
+                </div>
+            </div>
+            
+            <div class="example-box">
+                <h3>Box Model Properties:</h3>
+                <pre><code><span class="selector">.box</span> {
+    <span class="comment">/* Content dimensions */</span>
+    <span class="property">width</span>: <span class="value">300px</span>;
+    <span class="property">height</span>: <span class="value">200px</span>;
+    
+    <span class="comment">/* Padding (space inside) */</span>
+    <span class="property">padding</span>: <span class="value">20px</span>; <span class="comment">/* All sides */</span>
+    <span class="property">padding</span>: <span class="value">10px 20px</span>; <span class="comment">/* Top/Bottom, Left/Right */</span>
+    
+    <span class="comment">/* Border */</span>
+    <span class="property">border</span>: <span class="value">2px solid #333</span>; <span class="comment">/* Shorthand */</span>
+    <span class="property">border-radius</span>: <span class="value">10px</span>;
+    
+    <span class="comment">/* Margin (space outside) */</span>
+    <span class="property">margin</span>: <span class="value">20px</span>;
+    
+    <span class="comment">/* Box Sizing */</span>
+    <span class="property">box-sizing</span>: <span class="value">border-box</span>;
+}</code></pre>
+            </div>
+            
+            <div class="live-example">
+                <h3>Box Shadow Examples:</h3>
+                <div class="flex-container">
+                    <div style="flex:1; height:100px; background:white; box-shadow: 2px 2px 5px rgba(0,0,0,0.3); border-radius:8px; display:flex; align-items:center; justify-content:center;">
+                        Basic Shadow
+                    </div>
+                    <div style="flex:1; height:100px; background:white; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); border-radius:8px; display:flex; align-items:center; justify-content:center;">
+                        Multiple Shadows
+                    </div>
+                    <div style="flex:1; height:100px; background:white; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); border-radius:8px; display:flex; align-items:center; justify-content:center;">
+                        Inset Shadow
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Display Property -->
+        <section id="display-property">
+            <h2>8. Display Property</h2>
+            
+            <div class="example-box">
+                <h3>Display Values:</h3>
+                <pre><code><span class="comment">/* Block - Full width, new line */</span>
+<span class="selector">.block</span> { <span class="property">display</span>: <span class="value">block</span>; }
+
+<span class="comment">/* Inline - Flows with text */</span>
+<span class="selector">.inline</span> { <span class="property">display</span>: <span class="value">inline</span>; }
+
+<span class="comment">/* Inline-Block - Mix of both */</span>
+<span class="selector">.inline-block</span> { <span class="property">display</span>: <span class="value">inline-block</span>; }
+
+<span class="comment">/* None - Removes from flow */</span>
+<span class="selector">.hidden</span> { <span class="property">display</span>: <span class="value">none</span>; }
+
+<span class="comment">/* Flex - Modern layout */</span>
+<span class="selector">.container</span> { <span class="property">display</span>: <span class="value">flex</span>; }
+
+<span class="comment">/* Grid - Two-dimensional layout */</span>
+<span class="selector">.container</span> { <span class="property">display</span>: <span class="value">grid</span>; }</code></pre>
+            </div>
+            
+            <div class="live-example">
+                <h3>Display Examples:</h3>
+                <div class="demo-box">
+                    <h4>Block Elements (div):</h4>
+                    <div style="display: block; background: var(--primary-color); color: white; padding: 10px; margin: 5px 0;">Block 1</div>
+                    <div style="display: block; background: var(--primary-color); color: white; padding: 10px; margin: 5px 0;">Block 2</div>
+                    
+                    <h4 class="mt-3">Inline Elements (span):</h4>
+                    <span style="display: inline; background: var(--secondary-color); color: white; padding: 10px; margin: 0 5px;">Inline 1</span>
+                    <span style="display: inline; background: var(--secondary-color); color: white; padding: 10px; margin: 0 5px;">Inline 2</span>
+                    
+                    <h4 class="mt-3">Inline-Block Elements:</h4>
+                    <div style="display: inline-block; width: 100px; background: var(--accent-color); color: white; padding: 10px; margin: 0 5px;">Inline-Block 1</div>
+                    <div style="display: inline-block; width: 100px; background: var(--accent-color); color: white; padding: 10px; margin: 0 5px;">Inline-Block 2</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Positioning -->
+        <section id="positioning">
+            <h2>9. Positioning</h2>
+            
+            <div class="example-box">
+                <h3>Position Values:</h3>
+                <pre><code><span class="comment">/* Static - Default, normal flow */</span>
+<span class="selector">.static</span> { <span class="property">position</span>: <span class="value">static</span>; }
+
+<span class="comment">/* Relative - Positioned relative to normal position */</span>
+<span class="selector">.relative</span> { <span class="property">position</span>: <span class="value">relative</span>; <span class="property">top</span>: <span class="value">20px</span>; }
+
+<span class="comment">/* Absolute - Relative to nearest positioned ancestor */</span>
+<span class="selector">.absolute</span> { <span class="property">position</span>: <span class="value">absolute</span>; <span class="property">top</span>: <span class="value">0</span>; }
+
+<span class="comment">/* Fixed - Relative to viewport */</span>
+<span class="selector">.fixed</span> { <span class="property">position</span>: <span class="value">fixed</span>; <span class="property">bottom</span>: <span class="value">20px</span>; }
+
+<span class="comment">/* Sticky - Hybrid of relative and fixed */</span>
+<span class="selector">.sticky</span> { <span class="property">position</span>: <span class="value">sticky</span>; <span class="property">top</span>: <span class="value">0</span>; }</code></pre>
+            </div>
+            
+            <div class="live-example" style="position: relative; height: 200px; background: var(--light-color);">
+                <h3>Positioning Demo:</h3>
+                <div style="position: absolute; top: 20px; left: 20px; background: var(--primary-color); color: white; padding: 10px; border-radius: 4px;">
+                    Absolute (20px from top/left)
+                </div>
+                <div style="position: relative; top: 50px; left: 100px; background: var(--secondary-color); color: white; padding: 10px; border-radius: 4px;">
+                    Relative (50px from normal)
+                </div>
+                <div style="position: fixed; bottom: 20px; right: 20px; background: var(--accent-color); color: white; padding: 10px; border-radius: 4px;">
+                    Fixed (scroll to see)
+                </div>
+            </div>
+            
+            <h3>Z-Index (Stacking Order):</h3>
+            <div style="position: relative; height: 100px;">
+                <div style="position: absolute; top: 10px; left: 10px; width: 100px; height: 100px; background: var(--primary-color); z-index: 1; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;">z-index: 1</div>
+                <div style="position: absolute; top: 30px; left: 30px; width: 100px; height: 100px; background: var(--secondary-color); z-index: 2; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;">z-index: 2</div>
+                <div style="position: absolute; top: 50px; left: 50px; width: 100px; height: 100px; background: var(--accent-color); z-index: 3; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;">z-index: 3</div>
+            </div>
+        </section>
+
+        <!-- 10. CSS Units -->
+        <section id="css-units">
+            <h2>10. CSS Units</h2>
+            
+            <table>
+                <tr>
+                    <th>Unit Type</th>
+                    <th>Examples</th>
+                    <th>Use Case</th>
+                </tr>
+                <tr>
+                    <td>Absolute</td>
+                    <td>px, in, cm, mm, pt, pc</td>
+                    <td>Borders, fixed sizes</td>
+                </tr>
+                <tr>
+                    <td>Relative (Parent)</td>
+                    <td>%, em</td>
+                    <td>Fluid layouts, typography</td>
+                </tr>
+                <tr>
+                    <td>Relative (Root)</td>
+                    <td>rem</td>
+                    <td>Typography, spacing</td>
+                </tr>
+                <tr>
+                    <td>Viewport</td>
+                    <td>vw, vh, vmin, vmax</td>
+                    <td>Full-screen elements</td>
+                </tr>
+            </table>
+            
+            <div class="live-example">
+                <h3>Unit Comparison:</h3>
+                <div class="demo-box">
+                    <div style="font-size: 16px;">
+                        Parent font: 16px
+                        <div style="font-size: 1.5em; margin-left: 20px;">1.5em = 24px (relative to parent)</div>
+                        <div style="font-size: 1.5rem; margin-left: 20px;">1.5rem = 24px (relative to root)</div>
+                    </div>
+                    <div class="mt-2">
+                        <div style="width: 50%; height: 30px; background: var(--primary-color);"></div>
+                        <div style="width: 200px; height: 30px; background: var(--secondary-color);" class="mt-1"></div>
+                        <div style="width: 50vw; height: 30px; background: var(--accent-color);" class="mt-1"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. Flexbox Basics -->
+        <section id="flexbox">
+            <h2>11. Flexbox Basics</h2>
+            
+            <div class="example-box">
+                <h3>Flex Container Properties:</h3>
+                <pre><code><span class="selector">.container</span> {
+    <span class="property">display</span>: <span class="value">flex</span>;
+    <span class="property">flex-direction</span>: <span class="value">row</span>; <span class="comment">/* or column */</span>
+    <span class="property">justify-content</span>: <span class="value">center</span>; <span class="comment">/* Main axis */</span>
+    <span class="property">align-items</span>: <span class="value">center</span>; <span class="comment">/* Cross axis */</span>
+    <span class="property">flex-wrap</span>: <span class="value">wrap</span>;
+}</code></pre>
+            </div>
+            
+            <div class="live-example">
+                <h3>Flexbox Demo:</h3>
+                <div class="flex-demo" id="flexDemo" style="justify-content: flex-start; align-items: stretch;">
+                    <div class="flex-item">1</div>
+                    <div class="flex-item">2</div>
+                    <div class="flex-item">3</div>
+                    <div class="flex-item">4</div>
+                </div>
+                <div class="mt-2">
+                    <button class="btn btn-primary" onclick="document.getElementById('flexDemo').style.justifyContent='flex-start'">flex-start</button>
+                    <button class="btn btn-primary" onclick="document.getElementById('flexDemo').style.justifyContent='center'">center</button>
+                    <button class="btn btn-primary" onclick="document.getElementById('flexDemo').style.justifyContent='flex-end'">flex-end</button>
+                    <button class="btn btn-primary" onclick="document.getElementById('flexDemo').style.justifyContent='space-between'">space-between</button>
+                    <button class="btn btn-primary" onclick="document.getElementById('flexDemo').style.justifyContent='space-around'">space-around</button>
+                </div>
+                <div class="mt-1">
+                    <button class="btn btn-secondary" onclick="document.getElementById('flexDemo').style.flexDirection='row'">row</button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('flexDemo').style.flexDirection='column'">column</button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('flexDemo').style.flexDirection='row-reverse'">row-reverse</button>
+                </div>
+            </div>
+            
+            <h3>Flex Item Properties:</h3>
+            <pre><code><span class="selector">.item</span> {
+    <span class="property">flex</span>: <span class="value">1</span>; <span class="comment">/* flex-grow: 1, shrink: 1, basis: 0 */</span>
+    <span class="property">order</span>: <span class="value">2</span>; <span class="comment">/* Change visual order */</span>
+    <span class="property">align-self</span>: <span class="value">center</span>; <span class="comment">/* Override align-items */</span>
+}</code></pre>
+        </section>
+
+        <!-- 12. Responsive Design -->
+        <section id="responsive-design">
+            <h2>12. Responsive Design</h2>
+            
+            <div class="example-box">
+                <h3>Viewport Meta Tag:</h3>
+                <pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+                
+                <h3>Media Queries:</h3>
+                <pre><code><span class="comment">/* Mobile First Approach */</span>
+<span class="selector">.container</span> {
+    <span class="property">padding</span>: <span class="value">1rem</span>;
+}
+
+<span class="comment">/* Tablet */</span>
+<span class="selector">@media (min-width: 768px)</span> {
+    <span class="selector">.container</span> {
+        <span class="property">padding</span>: <span class="value">2rem</span>;
+    }
+}
+
+<span class="comment">/* Desktop */</span>
+<span class="selector">@media (min-width: 1024px)</span> {
+    <span class="selector">.container</span> {
+        <span class="property">max-width</span>: <span class="value">1200px</span>;
+        <span class="property">margin</span>: <span class="value">0 auto</span>;
+    }
+}</code></pre>
+            </div>
+            
+            <div class="live-example">
+                <h3>Responsive Grid:</h3>
+                <div class="grid-demo">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                    <div class="grid-item">4</div>
+                    <div class="grid-item">5</div>
+                    <div class="grid-item">6</div>
+                </div>
+                <p class="mt-2">Resize your browser to see the grid adjust automatically!</p>
+            </div>
+            
+            <h3>Responsive Images:</h3>
+            <div style="width: 100%; max-width: 600px; margin: 0 auto;">
+                <img src="https://via.placeholder.com/600x300/3498db/ffffff?text=Responsive+Image" alt="Responsive Image" style="max-width: 100%; height: auto; border-radius: 8px;">
+            </div>
+        </section>
+
+        <!-- 13. CSS Variables -->
+        <section id="css-variables">
+            <h2>13. CSS Variables (Custom Properties)</h2>
+            
+            <div class="example-box">
+                <h3>Declaring Variables:</h3>
+                <pre><code><span class="selector">:root</span> {
+    <span class="comment">/* Global variables */</span>
+    <span class="property">--primary-color</span>: <span class="value">#3498db</span>;
+    <span class="property">--spacing-unit</span>: <span class="value">1rem</span>;
+    <span class="property">--border-radius</span>: <span class="value">8px</span>;
+}</code></pre>
+                
+                <h3>Using Variables:</h3>
+                <pre><code><span class="selector">.button</span> {
+    <span class="property">background-color</span>: <span class="value">var(--primary-color)</span>;
+    <span class="property">padding</span>: <span class="value">calc(var(--spacing-unit) * 1.5)</span>;
+    <span class="property">border-radius</span>: <span class="value">var(--border-radius)</span>;
+}</code></pre>
+            </div>
+            
+            <div class="live-example">
+                <h3>Variable Demo:</h3>
+                <div id="variableDemo" style="background-color: var(--primary-color); color: white; padding: calc(var(--spacing-unit) * 2); border-radius: var(--border-radius); text-align: center;">
+                    This box uses CSS variables!<br>
+                    Primary Color: var(--primary-color)<br>
+                    Spacing: calc(var(--spacing-unit) * 2)<br>
+                    Border Radius: var(--border-radius)
+                </div>
+                <div class="mt-2">
+                    <button class="btn btn-primary" onclick="document.documentElement.style.setProperty('--primary-color', '#e74c3c')">Change to Red</button>
+                    <button class="btn btn-secondary" onclick="document.documentElement.style.setProperty('--primary-color', '#2ecc71')">Change to Green</button>
+                    <button class="btn btn-outline" onclick="document.documentElement.style.setProperty('--primary-color', '#3498db')">Reset to Blue</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 14. Transitions and Animations -->
+        <section id="transitions-animations">
+            <h2>14. Transitions and Animations</h2>
+            
+            <div class="example-box">
+                <h3>CSS Transitions:</h3>
+                <pre><code><span class="selector">.button</span> {
+    <span class="property">transition</span>: <span class="value">all 0.3s ease</span>;
+    <span class="comment">/* property | duration | timing-function | delay */</span>
+}
+
+<span class="selector">.button:hover</span> {
+    <span class="property">transform</span>: <span class="value">scale(1.1)</span>;
+    <span class="property">background-color</span>: <span class="value">#2ecc71</span>;
+}</code></pre>
+                
+                <h3>CSS Animations:</h3>
+                <pre><code><span class="selector">@keyframes slideIn</span> {
+    <span class="selector">from</span> { <span class="property">transform</span>: <span class="value">translateX(-100%)</span>; }
+    <span class="selector">to</span> { <span class="property">transform</span>: <span class="value">translateX(0)</span>; }
+}
+
+<span class="selector">.element</span> {
+    <span class="property">animation</span>: <span class="value">slideIn 1s ease</span>;
+    <span class="comment">/* name | duration | timing-function | delay | count */</span>
+}</code></pre>
+            </div>
+            
+            <div class="live-example">
+                <h3>Animation Demo:</h3>
+                <div class="animation-demo">
+                    <div class="animated-box" id="animatedBox"></div>
+                </div>
+                <div class="mt-2">
+                    <button class="btn btn-primary" onclick="startAnimation('bounce')">Bounce</button>
+                    <button class="btn btn-primary" onclick="startAnimation('spin')">Spin</button>
+                    <button class="btn btn-primary" onclick="startAnimation('pulse')">Pulse</button>
+                    <button class="btn btn-secondary" onclick="stopAnimation()">Stop</button>
+                </div>
+                
+                <style>
+                    @keyframes bounce {
+                        0%, 100% { transform: translateY(0); }
+                        50% { transform: translateY(-30px); }
+                    }
+                    
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                    
+                    @keyframes pulse {
+                        0%, 100% { transform: scale(1); opacity: 1; }
+                        50% { transform: scale(1.2); opacity: 0.7; }
+                    }
+                </style>
+                <script>
+                    function startAnimation(animationName) {
+                        const box = document.getElementById('animatedBox');
+                        box.style.animation = `${animationName} 1s ease infinite`;
+                    }
+                    
+                    function stopAnimation() {
+                        const box = document.getElementById('animatedBox');
+                        box.style.animation = 'none';
+                    }
+                </script>
+            </div>
+            
+            <h3>Transform Property:</h3>
+            <div class="flex-container">
+                <div style="flex:1; padding:20px; background:var(--primary-color); color:white; text-align:center; transform:rotate(10deg);">rotate(10deg)</div>
+                <div style="flex:1; padding:20px; background:var(--secondary-color); color:white; text-align:center; transform:scale(1.1);">scale(1.1)</div>
+                <div style="flex:1; padding:20px; background:var(--accent-color); color:white; text-align:center; transform:skewX(10deg);">skewX(10deg)</div>
+            </div>
+        </section>
+
+        <!-- 15. CSS Best Practices -->
+        <section id="best-practices">
+            <h2>15. CSS Best Practices</h2>
+            
+            <h3>1. Organization & Structure:</h3>
+            <pre><code><span class="comment">/* Recommended order within ruleset */</span>
+<span class="selector">.element</span> {
+    <span class="comment">/* Positioning */</span>
+    <span class="property">position</span>: <span class="value">relative</span>;
+    
+    <span class="comment">/* Display & Box Model */</span>
+    <span class="property">display</span>: <span class="value">block</span>;
+    <span class="property">width</span>: <span class="value">100%</span>;
+    <span class="property">padding</span>: <span class="value">1rem</span>;
+    
+    <span class="comment">/* Typography */</span>
+    <span class="property">font-family</span>: <span class="value">sans-serif</span>;
+    <span class="property">font-size</span>: <span class="value">16px</span>;
+    
+    <span class="comment">/* Colors & Background */</span>
+    <span class="property">color</span>: <span class="value">#333</span>;
+    <span class="property">background-color</span>: <span class="value">#fff</span>;
+}</code></pre>
+            
+            <h3>2. Naming Conventions (BEM):</h3>
+            <pre><code><span class="comment">/* Block */</span>
+<span class="selector">.card</span> {}
+
+<span class="comment">/* Element */</span>
+<span class="selector">.card__title</span> {}
+
+<span class="comment">/* Modifier */</span>
+<span class="selector">.card--featured</span> {}</code></pre>
+            
+            <h3>3. Performance Tips:</h3>
+            <ul>
+                <li>Use <code>transform</code> and <code>opacity</code> for animations (they don't trigger layout recalculation)</li>
+                <li>Minimize the use of expensive properties like <code>box-shadow</code> and <code>border-radius</code> on many elements</li>
+                <li>Use <code>will-change</code> to hint browsers about upcoming animations</li>
+            </ul>
+            
+            <h3>4. Accessibility:</h3>
+            <pre><code><span class="comment">/* Focus styles for keyboard navigation */</span>
+<span class="selector">button:focus</span>,
+<span class="selector">a:focus</span>,
+<span class="selector">input:focus</span> {
+    <span class="property">outline</span>: <span class="value">3px solid #4d90fe</span>;
+    <span class="property">outline-offset</span>: <span class="value">2px</span>;
+}</code></pre>
+        </section>
+
+        <!-- 16. Exercises and Projects -->
+        <section id="exercises">
+            <h2>16. Exercises and Projects</h2>
+            
+            <div class="exercise">
+                <h3>Exercise 1: Responsive Navigation Bar</h3>
+                <p>Create a navigation bar that:</p>
+                <ul>
+                    <li>Uses Flexbox for layout</li>
+                    <li>Has hover effects on links</li>
+                    <li>Collapses into hamburger menu on mobile</li>
+                    <li>Includes logo and search bar</li>
+                    <li>Has sticky positioning on scroll</li>
+                </ul>
+            </div>
+            
+            <div class="exercise">
+                <h3>Exercise 2: Card Component</h3>
+                <p>Create a reusable card component with:</p>
+                <ul>
+                    <li>Image header</li>
+                    <li>Title and description</li>
+                    <li>Action buttons</li>
+                    <li>Hover animations</li>
+                    <li>Responsive sizing</li>
+                    <li>Different variants (primary, secondary, outlined)</li>
+                </ul>
+            </div>
+            
+            <div class="exercise">
+                <h3>Project: Complete Website Layout</h3>
+                <p>Build a responsive website layout with:</p>
+                <ul>
+                    <li><strong>Header:</strong> Logo, navigation with dropdowns</li>
+                    <li><strong>Hero Section:</strong> Full-width background, centered content</li>
+                    <li><strong>Features Grid:</strong> Responsive 3-column grid</li>
+                    <li><strong>Testimonials Carousel:</strong> Horizontal scroll on mobile</li>
+                    <li><strong>Contact Form:</strong> Form validation styles</li>
+                    <li><strong>Footer:</strong> Multi-column links, social media icons</li>
+                </ul>
+                <p><strong>Requirements:</strong> Use CSS Grid and Flexbox, implement dark/light theme toggle, add smooth scrolling, ensure accessibility.</p>
+            </div>
+        </section>
+
+        <!-- 17. Quiz -->
+        <section id="quiz">
+            <h2>17. Quiz</h2>
+            
+            <div class="quiz">
+                <h3>Multiple Choice Questions:</h3>
+                <ol>
+                    <li>What does CSS stand for?
+                        <ol type="a">
+                            <li>Computer Style Sheets</li>
+                            <li>Creative Style System</li>
+                            <li>Cascading Style Sheets</li>
+                            <li>Colorful Style Sheets</li>
+                        </ol>
+                    </li>
+                    <li>Which property controls text color?
+                        <ol type="a">
+                            <li>text-color</li>
+                            <li>font-color</li>
+                            <li>color</li>
+                            <li>background-color</li>
+                        </ol>
+                    </li>
+                    <li>How do you center an element horizontally?
+                        <ol type="a">
+                            <li>text-align: center;</li>
+                            <li>margin: auto;</li>
+                            <li>align: center;</li>
+                            <li>Both a and b</li>
+                        </ol>
+                    </li>
+                    <li>Which selector has highest specificity?
+                        <ol type="a">
+                            <li>.class</li>
+                            <li>#id</li>
+                            <li>element</li>
+                            <li>inline style</li>
+                        </ol>
+                    </li>
+                </ol>
+                
+                <h3>True or False:</h3>
+                <ol>
+                    <li>CSS can change HTML content. (False)</li>
+                    <li>display: none; removes element from document flow. (True)</li>
+                    <li>Padding is outside the border. (False)</li>
+                    <li>vh units are relative to viewport height. (True)</li>
+                    <li>CSS variables can be changed with JavaScript. (True)</li>
+                </ol>
+                
+                <h3>Answers:</h3>
+                <p>Multiple Choice: 1. c, 2. c, 3. d, 4. d</p>
+            </div>
+        </section>
+
+        <!-- 18. Resources -->
+        <section id="resources">
+            <h2>18. Resources</h2>
+            
+            <h3>Online Tools:</h3>
+            <ul>
+                <li><a href="https://cssgradient.io/" target="_blank">CSS Gradient Generator</a></li>
+                <li><a href="https://flexboxfroggy.com/" target="_blank">Flexbox Froggy</a></li>
+                <li><a href="https://cssgridgarden.com/" target="_blank">Grid Garden</a></li>
+                <li><a href="https://caniuse.com/" target="_blank">Can I Use - Browser compatibility</a></li>
+            </ul>
+            
+            <h3>Documentation:</h3>
+            <ul>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">MDN CSS Reference</a></li>
+                <li><a href="https://css-tricks.com/" target="_blank">CSS Tricks</a></li>
+                <li><a href="https://www.w3schools.com/css/" target="_blank">W3Schools CSS Tutorial</a></li>
+            </ul>
+            
+            <h3>Quick Reference Card:</h3>
+            <div class="example-box">
+                <pre><code><span class="comment">/* Flexbox Container */</span>
+<span class="property">display</span>: <span class="value">flex</span>;
+<span class="property">flex-direction</span>: <span class="value">row | column</span>;
+<span class="property">justify-content</span>: <span class="value">flex-start | center | space-between</span>;
+<span class="property">align-items</span>: <span class="value">stretch | center | flex-start</span>;
+
+<span class="comment">/* Common Properties */</span>
+<span class="property">position</span>: <span class="value">static | relative | absolute | fixed | sticky</span>;
+<span class="property">display</span>: <span class="value">block | inline | inline-block | flex | grid | none</span>;
+<span class="property">z-index</span>: <span class="value">1</span>;
+
+<span class="comment">/* Box Model */</span>
+<span class="property">width</span>: <span class="value">100px | 50% | auto</span>;
+<span class="property">padding</span>: <span class="value">10px | 10px 20px | 10px 20px 30px 40px</span>;
+<span class="property">border</span>: <span class="value">1px solid #000</span>;
+<span class="property">border-radius</span>: <span class="value">5px</span>;
+
+<span class="comment">/* Responsive */</span>
+<span class="selector">@media (min-width: 768px)</span> { }</code></pre>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <h2>Congratulations on completing CSS Fundamentals! 🎉</h2>
+        <p>You've learned how to make beautiful, responsive websites. Keep building and experimenting!</p>
+        <p class="mt-2"><strong>Next Steps:</strong> Practice creating complex layouts, learn CSS preprocessors (SASS/SCSS), and move on to JavaScript Fundamentals.</p>
+        <div class="mt-3">
+            <button class="btn btn-primary" onclick="window.print()"><i class="fas fa-print"></i> Print Guide</button>
+            <button class="btn btn-secondary" onclick="downloadGuide()"><i class="fas fa-download"></i> Download as HTML</button>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const icon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.body.setAttribute('data-theme', newTheme);
+            icon.className = newTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+            
+            // Update button label
+            themeToggle.setAttribute('aria-label', 
+                newTheme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
+            
+            // Save preference
+            localStorage.setItem('theme', newTheme);
+        });
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.body.setAttribute('data-theme', savedTheme);
+            icon.className = savedTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+        }
+        
+        // Download guide functionality
+        function downloadGuide() {
+            const content = document.documentElement.outerHTML;
+            const blob = new Blob([content], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'css-fundamentals-guide.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add some interactive examples
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effect to all sections
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                section.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Make code blocks copyable
+            document.querySelectorAll('pre').forEach(pre => {
+                pre.addEventListener('click', function() {
+                    const text = this.textContent;
+                    navigator.clipboard.writeText(text).then(() => {
+                        const originalText = this.textContent;
+                        this.textContent = 'Copied to clipboard!';
+                        setTimeout(() => {
+                            this.textContent = originalText;
+                        }, 1000);
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
