@@ -1,0 +1,2777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Fundamentals - Complete Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #4fc3a1;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --success-color: #2ecc71;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --text-color: #333;
+            --text-light: #777;
+            --white: #ffffff;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+            --code-bg: #2d2d2d;
+            --code-color: #f8f8f2;
+            
+            /* Typography */
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-mono: 'Consolas', 'Monaco', 'Courier New', monospace;
+            --font-size-base: 16px;
+            --line-height: 1.6;
+            
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-main);
+            font-size: var(--font-size-base);
+            line-height: var(--line-height);
+            color: var(--text-color);
+            background-color: var(--white);
+            transition: var(--transition);
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-sm);
+            position: relative;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-lg);
+            position: relative;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: var(--spacing-lg);
+        }
+        
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Main Content */
+        .content {
+            min-width: 0; /* Prevent grid overflow */
+        }
+        
+        section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-xs);
+            border-bottom: 3px solid var(--light-color);
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+            margin: var(--spacing-md) 0 var(--spacing-sm);
+            font-size: 1.4rem;
+        }
+        
+        h4 {
+            color: var(--accent-color);
+            margin: var(--spacing-sm) 0 var(--spacing-xs);
+            font-size: 1.2rem;
+        }
+        
+        /* Code Styling */
+        code {
+            font-family: var(--font-mono);
+            background-color: rgba(0, 0, 0, 0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: var(--dark-color);
+        }
+        
+        pre {
+            background-color: var(--code-bg);
+            color: var(--code-color);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            margin: var(--spacing-sm) 0;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .comment { color: #888; }
+        .keyword { color: #f92672; }
+        .function { color: #66d9ef; }
+        .string { color: #a6e22e; }
+        .number { color: #ae81ff; }
+        .operator { color: #f8f8f2; }
+        
+        /* Example Boxes */
+        .example-box {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--primary-color);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            overflow-x: auto;
+        }
+        
+        .live-example {
+            background-color: rgba(74, 111, 165, 0.05);
+            border: 2px dashed var(--primary-color);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border-radius: var(--border-radius);
+        }
+        
+        .demo-box {
+            padding: var(--spacing-md);
+            background: white;
+            border-radius: calc(var(--border-radius) - 2px);
+            margin: var(--spacing-sm) 0;
+            border: 1px solid #eee;
+        }
+        
+        /* Interactive Elements */
+        .interactive-demo {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .demo-controls {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        button.secondary {
+            background-color: var(--accent-color);
+        }
+        
+        button.danger {
+            background-color: var(--danger-color);
+        }
+        
+        input, select, textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: var(--font-main);
+            transition: var(--transition);
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.2);
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: var(--spacing-lg);
+            height: fit-content;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow);
+        }
+        
+        .sidebar-section {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .sidebar-section h3 {
+            margin-top: 0;
+        }
+        
+        /* Code Playground */
+        .playground {
+            background: var(--code-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin: var(--spacing-md) 0;
+        }
+        
+        .playground-header {
+            background: #1a1a1a;
+            padding: var(--spacing-sm) var(--spacing-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        
+        .playground-code {
+            padding: var(--spacing-md);
+            font-family: var(--font-mono);
+            min-height: 200px;
+            color: var(--code-color);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .playground-output {
+            background: #1a1a1a;
+            padding: var(--spacing-md);
+            color: #00ff00;
+            font-family: var(--font-mono);
+            min-height: 100px;
+            max-height: 300px;
+            overflow-y: auto;
+            border-top: 1px solid #444;
+        }
+        
+        /* Exercise & Quiz */
+        .exercise {
+            background-color: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid var(--success-color);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .quiz {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--danger-color);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .quiz-question {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .quiz-options {
+            list-style: none;
+            margin: var(--spacing-sm) 0;
+        }
+        
+        .quiz-options li {
+            margin: var(--spacing-xs) 0;
+            padding: var(--spacing-xs);
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .quiz-options li:hover {
+            background: rgba(74, 111, 165, 0.1);
+        }
+        
+        .quiz-options li.selected {
+            background: rgba(74, 111, 165, 0.2);
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .quiz-feedback {
+            padding: var(--spacing-sm);
+            border-radius: var(--border-radius);
+            margin-top: var(--spacing-sm);
+            display: none;
+        }
+        
+        .quiz-feedback.correct {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: var(--success-color);
+            display: block;
+        }
+        
+        .quiz-feedback.incorrect {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--danger-color);
+            display: block;
+        }
+        
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--spacing-md) 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--light-color);
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+            background-color: var(--dark-color);
+            color: white;
+        }
+        
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .mt-1 { margin-top: var(--spacing-xs); }
+        .mt-2 { margin-top: var(--spacing-sm); }
+        .mt-3 { margin-top: var(--spacing-md); }
+        .mb-1 { margin-bottom: var(--spacing-xs); }
+        .mb-2 { margin-bottom: var(--spacing-sm); }
+        .mb-3 { margin-bottom: var(--spacing-md); }
+        .p-1 { padding: var(--spacing-xs); }
+        .p-2 { padding: var(--spacing-sm); }
+        .p-3 { padding: var(--spacing-md); }
+        .d-flex { display: flex; }
+        .flex-wrap { flex-wrap: wrap; }
+        .gap-1 { gap: var(--spacing-xs); }
+        .gap-2 { gap: var(--spacing-sm); }
+        .gap-3 { gap: var(--spacing-md); }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            section {
+                padding: var(--spacing-md);
+            }
+            
+            .demo-controls {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>JavaScript Fundamentals - Complete Guide</h1>
+        <p class="subtitle">Day 3: All Concepts with Live, Interactive Examples</p>
+        <nav>
+            <a href="#introduction">Introduction</a>
+            <a href="#basics">Basics</a>
+            <a href="#variables-datatypes">Variables</a>
+            <a href="#operators">Operators</a>
+            <a href="#control-flow">Control Flow</a>
+            <a href="#functions">Functions</a>
+            <a href="#arrays">Arrays</a>
+            <a href="#objects">Objects</a>
+            <a href="#dom-manipulation">DOM</a>
+            <a href="#events">Events</a>
+            <a href="#error-handling">Errors</a>
+            <a href="#es6-features">ES6+</a>
+            <a href="#exercises">Exercises</a>
+            <a href="#quiz">Quiz</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="content">
+            <!-- 1. Introduction to JavaScript -->
+            <section id="introduction">
+                <h2>1. Introduction to JavaScript</h2>
+                
+                <h3>What is JavaScript?</h3>
+                <p>JavaScript is a high-level, interpreted programming language that makes web pages interactive. It's one of the three core technologies of the web, alongside HTML and CSS.</p>
+                
+                <div class="live-example">
+                    <h4>Your First JavaScript Code:</h4>
+                    <div class="playground">
+                        <div class="playground-header">
+                            <span>JavaScript Console</span>
+                            <button onclick="runIntroductionCode()">Run Code</button>
+                        </div>
+                        <pre class="playground-code" id="intro-code">// Welcome to JavaScript!
+console.log("Hello, JavaScript World!");
+
+// Let's do some math
+let sum = 5 + 3;
+console.log("5 + 3 = " + sum);
+
+// Create a variable
+let message = "JavaScript is awesome!";
+console.log(message);</pre>
+                        <div class="playground-output" id="intro-output"></div>
+                    </div>
+                </div>
+                
+                <h3>JavaScript Timeline:</h3>
+                <ul>
+                    <li><strong>1995</strong>: Created by Brendan Eich in 10 days</li>
+                    <li><strong>1997</strong>: ECMAScript 1 (ES1) standardization</li>
+                    <li><strong>2009</strong>: ES5 (Modern features)</li>
+                    <li><strong>2015</strong>: ES6/ES2015 (Major update)</li>
+                    <li><strong>2016-2024</strong>: ES7-ES14 (Yearly updates)</li>
+                </ul>
+            </section>
+
+            <!-- 2. JavaScript Basics -->
+            <section id="basics">
+                <h2>2. JavaScript Basics</h2>
+                
+                <h3>Adding JavaScript to HTML:</h3>
+                <div class="example-box">
+                    <pre><code><span class="comment">&lt;!-- Method 1: Internal --&gt;</span>
+&lt;script&gt;
+    console.log("Hello from internal JS");
+&lt;/script&gt;
+
+<span class="comment">&lt;!-- Method 2: External (Recommended) --&gt;</span>
+&lt;script src="script.js" defer&gt;&lt;/script&gt;</code></pre>
+                </div>
+                
+                <h3>Console Methods:</h3>
+                <div class="live-example">
+                    <div class="demo-box">
+                        <p>Try these console methods in the playground:</p>
+                        <div class="demo-controls">
+                            <button onclick="demoConsoleLog()">console.log()</button>
+                            <button onclick="demoConsoleWarn()">console.warn()</button>
+                            <button onclick="demoConsoleError()">console.error()</button>
+                            <button onclick="demoConsoleTable()">console.table()</button>
+                            <button onclick="demoConsoleGroup()">console.group()</button>
+                        </div>
+                        <div id="console-output" class="playground-output mt-2" style="min-height: 100px;"></div>
+                    </div>
+                </div>
+                
+                <h3>Basic Output Methods:</h3>
+                <div class="demo-controls">
+                    <button onclick="showAlert()">Show Alert</button>
+                    <button onclick="showConfirm()">Show Confirm</button>
+                    <button onclick="showPrompt()">Show Prompt</button>
+                </div>
+            </section>
+
+            <!-- 3. Variables and Data Types -->
+            <section id="variables-datatypes">
+                <h2>3. Variables and Data Types</h2>
+                
+                <h3>Variable Declaration:</h3>
+                <div class="example-box">
+                    <pre><code><span class="comment">// var (function-scoped, avoid in modern code)</span>
+<span class="keyword">var</span> oldVariable = <span class="string">"I'm old"</span>;
+
+<span class="comment">// let (block-scoped, can be reassigned)</span>
+<span class="keyword">let</span> changeable = <span class="string">"I can change"</span>;
+changeable = <span class="string">"New value"</span>;
+
+<span class="comment">// const (block-scoped, cannot be reassigned)</span>
+<span class="keyword">const</span> constant = <span class="string">"I cannot change"</span>;
+<span class="comment">// constant = "New value"; // Error!</span></code></pre>
+                </div>
+                
+                <div class="live-example">
+                    <h4>Data Types Demo:</h4>
+                    <div class="demo-box">
+                        <div class="demo-controls">
+                            <button onclick="showDataType('string')">String</button>
+                            <button onclick="showDataType('number')">Number</button>
+                            <button onclick="showDataType('boolean')">Boolean</button>
+                            <button onclick="showDataType('array')">Array</button>
+                            <button onclick="showDataType('object')">Object</button>
+                            <button onclick="showDataType('null')">Null</button>
+                            <button onclick="showDataType('undefined')">Undefined</button>
+                        </div>
+                        <div id="data-type-output" class="mt-2 p-2" style="background: #f0f0f0; border-radius: 4px;"></div>
+                    </div>
+                </div>
+                
+                <h3>Type Conversion:</h3>
+                <div class="playground">
+                    <div class="playground-header">
+                        <span>Type Conversion Playground</span>
+                        <button onclick="runTypeConversion()">Run Conversion</button>
+                    </div>
+                    <pre class="playground-code" id="type-conversion-code">// String Conversion
+let str1 = String(123);        // "123"
+let str2 = String(true);       // "true"
+let str3 = (123).toString();   // "123"
+
+// Number Conversion
+let num1 = Number("123");      // 123
+let num2 = Number("123abc");   // NaN
+let num3 = +"123";             // 123 (unary plus)
+
+// Boolean Conversion
+let bool1 = Boolean(1);        // true
+let bool2 = Boolean(0);        // false
+let bool3 = Boolean("hello");  // true
+let bool4 = !!0;               // false (double NOT)
+
+console.log("String conversions:", str1, str2, str3);
+console.log("Number conversions:", num1, num2, num3);
+console.log("Boolean conversions:", bool1, bool2, bool3, bool4);</pre>
+                    <div class="playground-output" id="type-conversion-output"></div>
+                </div>
+            </section>
+
+            <!-- 4. Operators -->
+            <section id="operators">
+                <h2>4. Operators</h2>
+                
+                <h3>Arithmetic Operators:</h3>
+                <div class="live-example">
+                    <div class="demo-box">
+                        <div class="d-flex flex-wrap gap-2">
+                            <input type="number" id="operand1" value="10" style="width: 80px;">
+                            <select id="arithmetic-operator">
+                                <option value="+">+ (Add)</option>
+                                <option value="-">- (Subtract)</option>
+                                <option value="*">* (Multiply)</option>
+                                <option value="/">/ (Divide)</option>
+                                <option value="%">% (Modulus)</option>
+                                <option value="**">** (Exponent)</option>
+                            </select>
+                            <input type="number" id="operand2" value="3" style="width: 80px;">
+                            <button onclick="calculateArithmetic()">=</button>
+                            <span id="arithmetic-result" style="font-weight: bold; font-size: 1.2rem;"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Comparison Operators:</h3>
+                <div class="example-box">
+                    <pre><code><span class="comment">// Equality (avoid ==, use ===)</span>
+<span class="number">10</span> == <span class="string">"10"</span>     <span class="comment">// true (type coercion)</span>
+<span class="number">10</span> === <span class="string">"10"</span>    <span class="comment">// false (strict)</span>
+<span class="number">10</span> != <span class="string">"10"</span>     <span class="comment">// false</span>
+<span class="number">10</span> !== <span class="string">"10"</span>    <span class="comment">// true</span>
+
+<span class="comment">// Relational</span>
+<span class="number">10</span> > <span class="number">5</span>          <span class="comment">// true</span>
+<span class="number">10</span> < <span class="number">5</span>          <span class="comment">// false</span></code></pre>
+                </div>
+                
+                <h3>Logical Operators:</h3>
+                <div class="live-example">
+                    <div class="demo-box">
+                        <p>Enter age and hasLicense to check if can drive:</p>
+                        <div class="d-flex flex-wrap gap-2 mb-2">
+                            <input type="number" id="driver-age" placeholder="Age" value="18">
+                            <select id="has-license">
+                                <option value="true">Has License</option>
+                                <option value="false">No License</option>
+                            </select>
+                            <button onclick="checkDrivingEligibility()">Check Eligibility</button>
+                        </div>
+                        <div id="eligibility-result"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Control Flow -->
+            <section id="control-flow">
+                <h2>5. Control Flow</h2>
+                
+                <h3>Conditional Statements:</h3>
+                <div class="playground">
+                    <div class="playground-header">
+                        <span>Grade Calculator</span>
+                        <button onclick="calculateGrade()">Calculate Grade</button>
+                    </div>
+                    <pre class="playground-code" id="grade-code">function getGrade(score) {
+    if (score >= 90) {
+        return "A";
+    } else if (score >= 80) {
+        return "B";
+    } else if (score >= 70) {
+        return "C";
+    } else if (score >= 60) {
+        return "D";
+    } else {
+        return "F";
+    }
+}
+
+// Test with different scores
+let testScores = [95, 85, 75, 65, 55];
+testScores.forEach(score => {
+    console.log(`Score: ${score} → Grade: ${getGrade(score)}`);
+});</pre>
+                    <div class="playground-output" id="grade-output"></div>
+                </div>
+                
+                <h3>Loops:</h3>
+                <div class="live-example">
+                    <div class="demo-box">
+                        <p>Different types of loops:</p>
+                        <div class="demo-controls">
+                            <button onclick="demoForLoop()">For Loop</button>
+                            <button onclick="demoWhileLoop()">While Loop</button>
+                            <button onclick="demoForOfLoop()">For...of Loop</button>
+                            <button onclick="demoForInLoop()">For...in Loop</button>
+                        </div>
+                        <div id="loop-output" class="playground-output mt-2" style="min-height: 100px;"></div>
+                    </div>
+                </div>
+                
+                <h3>Switch Statement:</h3>
+                <div class="example-box">
+                    <pre><code><span class="keyword">let</span> day = <span class="string">"Monday"</span>;
+
+<span class="keyword">switch</span>(day) {
+    <span class="keyword">case</span> <span class="string">"Monday"</span>:
+        console.log(<span class="string">"Start of work week"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">"Tuesday"</span>:
+    <span class="keyword">case</span> <span class="string">"Wednesday"</span>:
+    <span class="keyword">case</span> <span class="string">"Thursday"</span>:
+        console.log(<span class="string">"Mid week"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">"Friday"</span>:
+        console.log(<span class="string">"Weekend is coming!"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">"Saturday"</span>:
+    <span class="keyword">case</span> <span class="string">"Sunday"</span>:
+        console.log(<span class="string">"Weekend!"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">default</span>:
+        console.log(<span class="string">"Invalid day"</span>);
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- 6. Functions -->
+            <section id="functions">
+                <h2>6. Functions</h2>
+                
+                <h3>Function Types:</h3>
+                <div class="example-box">
+                    <pre><code><span class="comment">// Function declaration</span>
+<span class="keyword">function</span> <span class="function">greet</span>(name) {
+    <span class="keyword">return</span> <span class="string">`Hello, </span><span class="operator">${</span>name<span class="operator">}</span><span class="string">!`</span>;
+}
+
+<span class="comment">// Function expression</span>
+<span class="keyword">const</span> greet = <span class="keyword">function</span>(name) {
+    <span class="keyword">return</span> <span class="string">`Hello, </span><span class="operator">${</span>name<span class="operator">}</span><span class="string">!`</span>;
+};
+
+<span class="comment">// Arrow function</span>
+<span class="keyword">const</span> greet = (name) <span class="operator">=></span> <span class="string">`Hello, </span><span class="operator">${</span>name<span class="operator">}</span><span class="string">!`</span>;</code></pre>
+                </div>
+                
+                <div class="live-example">
+                    <h4>Function Playground:</h4>
+                    <div class="demo-box">
+                        <div class="d-flex flex-wrap gap-2 mb-2">
+                            <input type="number" id="func-num1" placeholder="Number 1" value="5">
+                            <input type="number" id="func-num2" placeholder="Number 2" value="3">
+                            <button onclick="callAddFunction()">Add</button>
+                            <button onclick="callMultiplyFunction()">Multiply</button>
+                            <button onclick="callPowerFunction()">Power</button>
+                        </div>
+                        <div id="function-result"></div>
+                    </div>
+                </div>
+                
+                <h3>Recursion Example:</h3>
+                <div class="playground">
+                    <div class="playground-header">
+                        <span>Factorial Calculator (Recursive)</span>
+                        <button onclick="calculateFactorial()">Calculate Factorial</button>
+                    </div>
+                    <pre class="playground-code" id="factorial-code">// Recursive factorial function
+function factorial(n) {
+    // Base case
+    if (n <= 1) {
+        return 1;
+    }
+    // Recursive case
+    return n * factorial(n - 1);
+}
+
+// Test with different numbers
+let numbers = [1, 2, 3, 4, 5, 6];
+numbers.forEach(n => {
+    console.log(`${n}! = ${factorial(n)}`);
+});</pre>
+                    <div class="playground-output" id="factorial-output"></div>
+                </div>
+            </section>
+
+            <!-- 7. Arrays -->
+            <section id="arrays">
+                <h2>7. Arrays</h2>
+                
+                <h3>Creating Arrays:</h3>
+                <div class="example-box">
+                    <pre><code><span class="comment">// Array literal</span>
+<span class="keyword">let</span> fruits = [<span class="string">"apple"</span>, <span class="string">"banana"</span>, <span class="string">"orange"</span>];
+
+<span class="comment">// Array constructor</span>
+<span class="keyword">let</span> numbers = <span class="keyword">new</span> Array(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);
+
+<span class="comment">// Array.of()</span>
+<span class="keyword">let</span> array1 = Array.of(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</code></pre>
+                </div>
+                
+                <div class="live-example">
+                    <h4>Array Methods Demo:</h4>
+                    <div class="demo-box">
+                        <p>Original array: <code id="original-array">["apple", "banana", "orange", "grape", "kiwi"]</code></p>
+                        <div class="demo-controls">
+                            <button onclick="arrayPush()">Push "melon"</button>
+                            <button onclick="arrayPop()">Pop</button>
+                            <button onclick="arrayShift()">Shift</button>
+                            <button onclick="arrayUnshift()">Unshift "berry"</button>
+                            <button onclick="arraySlice()">Slice (1, 4)</button>
+                            <button onclick="arraySplice()">Splice (2, 1, "pear")</button>
+                            <button onclick="resetArray()">Reset Array</button>
+                        </div>
+                        <div id="array-result" class="mt-2 p-2" style="background: #f0f0f0; border-radius: 4px;"></div>
+                    </div>
+                </div>
+                
+                <h3>Array Iteration Methods:</h3>
+                <div class="playground">
+                    <div class="playground-header">
+                        <span>Array Transformation</span>
+                        <button onclick="transformArray()">Transform Array</button>
+                    </div>
+                    <pre class="playground-code" id="array-transform-code">let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+// map: Create new array with squared numbers
+let squared = numbers.map(n => n * n);
+console.log("Squared:", squared);
+
+// filter: Get even numbers only
+let evens = numbers.filter(n => n % 2 === 0);
+console.log("Even numbers:", evens);
+
+// reduce: Calculate sum
+let sum = numbers.reduce((total, num) => total + num, 0);
+console.log("Sum:", sum);
+
+// find: First number greater than 5
+let firstBig = numbers.find(n => n > 5);
+console.log("First > 5:", firstBig);
+
+// some: Check if any number is even
+let hasEven = numbers.some(n => n % 2 === 0);
+console.log("Has even numbers:", hasEven);
+
+// every: Check if all numbers are positive
+let allPositive = numbers.every(n => n > 0);
+console.log("All positive:", allPositive);</pre>
+                    <div class="playground-output" id="array-transform-output"></div>
+                </div>
+            </section>
+
+            <!-- 8. Objects -->
+            <section id="objects">
+                <h2>8. Objects</h2>
+                
+                <h3>Creating Objects:</h3>
+                <div class="example-box">
+                    <pre><code><span class="comment">// Object literal</span>
+<span class="keyword">let</span> person = {
+    name: <span class="string">"John"</span>,
+    age: <span class="number">30</span>,
+    isStudent: <span class="keyword">false</span>,
+    greet: <span class="keyword">function</span>() {
+        <span class="keyword">return</span> <span class="string">`Hello, I'm </span><span class="operator">${</span><span class="keyword">this</span>.name<span class="operator">}</span><span class="string">`</span>;
+    }
+};
+
+<span class="comment">// Class syntax (ES6)</span>
+<span class="keyword">class</span> User {
+    <span class="function">constructor</span>(name, email) {
+        <span class="keyword">this</span>.name = name;
+        <span class="keyword">this</span>.email = email;
+    }
+    
+    <span class="function">greet</span>() {
+        <span class="keyword">return</span> <span class="string">`Hello, I'm </span><span class="operator">${</span><span class="keyword">this</span>.name<span class="operator">}</span><span class="string">`</span>;
+    }
+}</code></pre>
+                </div>
+                
+                <div class="live-example">
+                    <h4>Object Manipulation:</h4>
+                    <div class="demo-box">
+                        <div class="demo-controls">
+                            <button onclick="createPersonObject()">Create Person Object</button>
+                            <button onclick="addProperty()">Add Property</button>
+                            <button onclick="updateProperty()">Update Property</button>
+                            <button onclick="deleteProperty()">Delete Property</button>
+                            <button onclick="showObjectMethods()">Object Methods</button>
+                        </div>
+                        <pre id="object-output" class="playground-output mt-2" style="min-height: 150px;"></pre>
+                    </div>
+                </div>
+                
+                <h3>Object Destructuring:</h3>
+                <div class="playground">
+                    <div class="playground-header">
+                        <span>Destructuring Demo</span>
+                        <button onclick="demoDestructuring()">Run Destructuring</button>
+                    </div>
+                    <pre class="playground-code" id="destructuring-code">// Object with nested data
+const user = {
+    name: "Alice",
+    age: 30,
+    address: {
+        city: "New York",
+        zip: "10001",
+        coordinates: {
+            lat: 40.7128,
+            lng: -74.0060
+        }
+    },
+    hobbies: ["reading", "coding", "hiking"]
+};
+
+// Basic destructuring
+const { name, age } = user;
+console.log("Basic:", name, age);
+
+// With different variable names
+const { name: userName, age: userAge } = user;
+console.log("Renamed:", userName, userAge);
+
+// Default values
+const { name, country = "USA" } = user;
+console.log("With default:", name, country);
+
+// Nested destructuring
+const { address: { city, zip } } = user;
+console.log("Nested:", city, zip);
+
+// Deep nested destructuring
+const { address: { coordinates: { lat, lng } } } = user;
+console.log("Coordinates:", lat, lng);
+
+// Rest pattern
+const { name, ...rest } = user;
+console.log("Name:", name);
+console.log("Rest:", rest);
+
+// Array destructuring from object property
+const { hobbies: [firstHobby, ...otherHobbies] } = user;
+console.log("First hobby:", firstHobby);
+console.log("Other hobbies:", otherHobbies);</pre>
+                    <div class="playground-output" id="destructuring-output"></div>
+                </div>
+            </section>
+
+            <!-- 9. DOM Manipulation -->
+            <section id="dom-manipulation">
+                <h2>9. DOM Manipulation</h2>
+                
+                <h3>Selecting Elements:</h3>
+                <div class="example-box">
+                    <pre><code><span class="comment">// By ID</span>
+<span class="keyword">let</span> header = document.getElementById(<span class="string">"header"</span>);
+
+<span class="comment">// By class name</span>
+<span class="keyword">let</span> items = document.getElementsByClassName(<span class="string">"item"</span>);
+
+<span class="comment">// By CSS selector</span>
+<span class="keyword">let</span> container = document.querySelector(<span class="string">".container"</span>);
+<span class="keyword">let</span> buttons = document.querySelectorAll(<span class="string">"button"</span>);</code></pre>
+                </div>
+                
+                <div class="live-example">
+                    <h4>DOM Playground:</h4>
+                    <div class="demo-box" id="dom-playground">
+                        <p id="dom-text">This is a DOM element that can be manipulated.</p>
+                        <div class="demo-controls">
+                            <button onclick="changeDomText()">Change Text</button>
+                            <button onclick="changeDomColor()">Change Color</button>
+                            <button onclick="toggleDomClass()">Toggle Class</button>
+                            <button onclick="addDomElement()">Add Element</button>
+                            <button onclick="removeDomElement()">Remove Element</button>
+                        </div>
+                        <div id="dom-container" class="mt-2 p-2" style="border: 1px dashed #ccc; min-height: 50px;"></div>
+                    </div>
+                </div>
+                
+                <h3>Form Handling:</h3>
+                <div class="demo-box">
+                    <form id="user-form" onsubmit="event.preventDefault(); handleFormSubmit();">
+                        <div style="margin-bottom: var(--spacing-sm);">
+                            <label style="display: block; margin-bottom: 5px;">Name:</label>
+                            <input type="text" id="user-name" placeholder="Enter your name" required style="width: 100%;">
+                        </div>
+                        <div style="margin-bottom: var(--spacing-sm);">
+                            <label style="display: block; margin-bottom: 5px;">Email:</label>
+                            <input type="email" id="user-email" placeholder="Enter your email" required style="width: 100%;">
+                        </div>
+                        <div style="margin-bottom: var(--spacing-sm);">
+                            <label style="display: block; margin-bottom: 5px;">Age:</label>
+                            <input type="number" id="user-age" min="1" max="120" placeholder="Enter your age" style="width: 100%;">
+                        </div>
+                        <button type="submit" style="width: 100%;">Submit Form</button>
+                    </form>
+                    <div id="form-output" class="mt-2 p-2" style="background: #f0f0f0; border-radius: 4px; display: none;"></div>
+                </div>
+            </section>
+
+            <!-- 10. Events -->
+            <section id="events">
+                <h2>10. Events</h2>
+                
+                <h3>Event Listeners:</h3>
+                <div class="example-box">
+                    <pre><code><span class="comment">// Add event listener</span>
+button.addEventListener(<span class="string">"click"</span>, (event) => {
+    console.log(<span class="string">"Button clicked"</span>);
+    console.log(<span class="string">"Event type:"</span>, event.type);
+    console.log(<span class="string">"Target:"</span>, event.target);
+});
+
+<span class="comment">// Remove event listener</span>
+<span class="keyword">function</span> <span class="function">handleClick</span>() {
+    console.log(<span class="string">"Clicked"</span>);
+}
+button.addEventListener(<span class="string">"click"</span>, handleClick);
+button.removeEventListener(<span class="string">"click"</span>, handleClick);</code></pre>
+                </div>
+                
+                <div class="live-example">
+                    <h4>Event Demo:</h4>
+                    <div class="demo-box">
+                        <div id="event-box" style="width: 200px; height: 200px; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; border-radius: var(--border-radius); margin: 0 auto; cursor: pointer;">
+                            Click or Hover Me
+                        </div>
+                        <div class="demo-controls" style="justify-content: center; margin-top: var(--spacing-md);">
+                            <button onclick="startEventListeners()">Start Event Listeners</button>
+                            <button onclick="stopEventListeners()">Stop Event Listeners</button>
+                            <button onclick="clearEventLog()">Clear Log</button>
+                        </div>
+                        <div id="event-log" class="playground-output mt-2" style="min-height: 100px;"></div>
+                    </div>
+                </div>
+                
+                <h3>Event Delegation:</h3>
+                <div class="demo-box">
+                    <p>Click on any item below (event delegation in action):</p>
+                    <ul id="event-list" style="list-style: none; padding: 0;">
+                        <li class="event-item" style="padding: 10px; margin: 5px 0; background: #f0f0f0; border-radius: 4px; cursor: pointer;">Item 1</li>
+                        <li class="event-item" style="padding: 10px; margin: 5px 0; background: #f0f0f0; border-radius: 4px; cursor: pointer;">Item 2</li>
+                        <li class="event-item" style="padding: 10px; margin: 5px 0; background: #f0f0f0; border-radius: 4px; cursor: pointer;">Item 3</li>
+                        <li class="event-item" style="padding: 10px; margin: 5px 0; background: #f0f0f0; border-radius: 4px; cursor: pointer;">Item 4</li>
+                    </ul>
+                    <button onclick="addEventItem()" class="mt-2">Add New Item</button>
+                    <div id="event-delegation-output" class="mt-2 p-2" style="background: #e8f4fc; border-radius: 4px;"></div>
+                </div>
+            </section>
+
+            <!-- 11. Error Handling -->
+            <section id="error-handling">
+                <h2>11. Error Handling</h2>
+                
+                <h3>Try...Catch...Finally:</h3>
+                <div class="example-box">
+                    <pre><code><span class="keyword">try</span> {
+    <span class="comment">// Code that might throw an error</span>
+    <span class="keyword">let</span> result = riskyOperation();
+    console.log(result);
+} <span class="keyword">catch</span> (error) {
+    <span class="comment">// Handle the error</span>
+    console.error(<span class="string">"An error occurred:"</span>, error.message);
+} <span class="keyword">finally</span> {
+    <span class="comment">// Always executes</span>
+    console.log(<span class="string">"Cleanup code"</span>);
+}</code></pre>
+                </div>
+                
+                <div class="live-example">
+                    <h4>Error Handling Demo:</h4>
+                    <div class="demo-box">
+                        <p>Enter a number to parse (try non-numeric input for error):</p>
+                        <div class="d-flex flex-wrap gap-2 mb-2">
+                            <input type="text" id="parse-input" placeholder="Enter a number" value="123abc">
+                            <button onclick="parseWithErrorHandling()">Parse with Try-Catch</button>
+                            <button onclick="parseWithoutErrorHandling()">Parse without Try-Catch</button>
+                        </div>
+                        <div id="error-output" class="mt-2 p-2" style="background: #f8d7da; border-radius: 4px; display: none;"></div>
+                        <div id="parse-result" class="mt-2"></div>
+                    </div>
+                </div>
+                
+                <h3>Custom Errors:</h3>
+                <div class="playground">
+                    <div class="playground-header">
+                        <span>Custom Error Classes</span>
+                        <button onclick="demoCustomErrors()">Demo Custom Errors</button>
+                    </div>
+                    <pre class="playground-code" id="custom-error-code">// Custom error class
+class ValidationError extends Error {
+    constructor(message, field) {
+        super(message);
+        this.name = "ValidationError";
+        this.field = field;
+        this.timestamp = new Date();
+    }
+}
+
+// Another custom error
+class NetworkError extends Error {
+    constructor(message, statusCode) {
+        super(message);
+        this.name = "NetworkError";
+        this.statusCode = statusCode;
+    }
+}
+
+// Function that uses custom errors
+function validateUser(user) {
+    if (!user || typeof user !== 'object') {
+        throw new ValidationError("User must be an object", "user");
+    }
+    
+    if (!user.name || typeof user.name !== 'string') {
+        throw new ValidationError("User name must be a string", "name");
+    }
+    
+    if (!user.email || !user.email.includes('@')) {
+        throw new ValidationError("Invalid email address", "email");
+    }
+    
+    if (user.age && (user.age < 0 || user.age > 150)) {
+        throw new ValidationError("Age must be between 0 and 150", "age");
+    }
+    
+    return true;
+}
+
+// Test validation
+try {
+    console.log("Testing valid user...");
+    validateUser({ name: "John", email: "john@example.com", age: 25 });
+    console.log("✓ Valid user passed");
+    
+    console.log("\nTesting invalid user...");
+    validateUser({ name: "", email: "invalid" });
+} catch (error) {
+    if (error instanceof ValidationError) {
+        console.error(`Validation Error in ${error.field}: ${error.message}`);
+        console.error(`Timestamp: ${error.timestamp}`);
+    } else {
+        console.error("Unknown error:", error);
+    }
+}</pre>
+                    <div class="playground-output" id="custom-error-output"></div>
+                </div>
+            </section>
+
+            <!-- 12. ES6+ Features -->
+            <section id="es6-features">
+                <h2>12. ES6+ Features</h2>
+                
+                <h3>Let and Const vs Var:</h3>
+                <div class="playground">
+                    <div class="playground-header">
+                        <span>Scope Comparison</span>
+                        <button onclick="demoScope()">Run Scope Demo</button>
+                    </div>
+                    <pre class="playground-code" id="scope-code">// Demonstrating scope differences
+console.log("=== var (function scope) ===");
+function varDemo() {
+    if (true) {
+        var x = "I'm a var";
+        console.log("Inside block:", x);
+    }
+    console.log("Outside block:", x); // Still accessible
+}
+
+console.log("=== let/const (block scope) ===");
+function letDemo() {
+    if (true) {
+        let y = "I'm a let";
+        const z = "I'm a const";
+        console.log("Inside block:", y, z);
+    }
+    // console.log("Outside block:", y); // Error: y is not defined
+    // console.log("Outside block:", z); // Error: z is not defined
+}
+
+console.log("=== Loop scoping ===");
+console.log("Using var in loop:");
+for (var i = 0; i < 3; i++) {
+    setTimeout(() => console.log("var i:", i), 100);
+}
+
+console.log("Using let in loop:");
+for (let j = 0; j < 3; j++) {
+    setTimeout(() => console.log("let j:", j), 100);
+}
+
+varDemo();
+letDemo();</pre>
+                    <div class="playground-output" id="scope-output"></div>
+                </div>
+                
+                <h3>Arrow Functions:</h3>
+                <div class="example-box">
+                    <pre><code><span class="comment">// Regular function</span>
+<span class="keyword">function</span> <span class="function">add</span>(a, b) {
+    <span class="keyword">return</span> a + b;
+}
+
+<span class="comment">// Arrow function equivalent</span>
+<span class="keyword">const</span> add = (a, b) => a + b;
+
+<span class="comment">// Single parameter (no parentheses needed)</span>
+<span class="keyword">const</span> square = x => x * x;
+
+<span class="comment">// No parameters</span>
+<span class="keyword">const</span> greet = () => <span class="string">"Hello World!"</span>;
+
+<span class="comment">// Multi-line arrow function</span>
+<span class="keyword">const</span> process = (input) => {
+    <span class="keyword">const</span> result = input * <span class="number">2</span>;
+    <span class="keyword">return</span> result;
+};</code></pre>
+                </div>
+                
+                <h3>Template Literals and Destructuring:</h3>
+                <div class="live-example">
+                    <div class="demo-box">
+                        <div class="demo-controls">
+                            <button onclick="demoTemplateLiterals()">Template Literals</button>
+                            <button onclick="demoDestructuringES6()">Destructuring</button>
+                            <button onclick="demoSpreadOperator()">Spread Operator</button>
+                            <button onclick="demoRestParameters()">Rest Parameters</button>
+                        </div>
+                        <div id="es6-output" class="playground-output mt-2" style="min-height: 100px;"></div>
+                    </div>
+                </div>
+                
+                <h3>Classes and Modules:</h3>
+                <div class="playground">
+                    <div class="playground-header">
+                        <span>ES6 Classes</span>
+                        <button onclick="demoClasses()">Run Class Demo</button>
+                    </div>
+                    <pre class="playground-code" id="class-code">// Base class
+class Animal {
+    constructor(name) {
+        this.name = name;
+    }
+    
+    speak() {
+        console.log(`${this.name} makes a sound`);
+    }
+    
+    // Static method
+    static info() {
+        return "This is an Animal class";
+    }
+}
+
+// Derived class
+class Dog extends Animal {
+    constructor(name, breed) {
+        super(name); // Call parent constructor
+        this.breed = breed;
+    }
+    
+    // Override method
+    speak() {
+        console.log(`${this.name} barks`);
+    }
+    
+    // New method
+    fetch() {
+        console.log(`${this.name} fetches the ball`);
+    }
+    
+    // Getter
+    get description() {
+        return `${this.name} is a ${this.breed}`;
+    }
+    
+    // Setter
+    set nickname(value) {
+        this._nickname = value;
+    }
+    
+    get nickname() {
+        return this._nickname || "No nickname";
+    }
+}
+
+// Using classes
+console.log(Animal.info());
+
+const myDog = new Dog("Rex", "Labrador");
+myDog.speak();
+myDog.fetch();
+console.log(myDog.description);
+
+myDog.nickname = "Buddy";
+console.log(myDog.nickname);
+
+// Check instance
+console.log("Is myDog an Animal?", myDog instanceof Animal);
+console.log("Is myDog a Dog?", myDog instanceof Dog);</pre>
+                    <div class="playground-output" id="class-output"></div>
+                </div>
+            </section>
+
+            <!-- 13. Exercises -->
+            <section id="exercises">
+                <h2>13. Exercises and Projects</h2>
+                
+                <div class="exercise">
+                    <h3>Exercise 1: Calculator</h3>
+                    <p>Create a basic calculator that can add, subtract, multiply, and divide.</p>
+                    <div class="demo-box">
+                        <div class="d-flex flex-wrap gap-2 mb-2">
+                            <input type="number" id="calc-num1" placeholder="Number 1" value="10">
+                            <select id="calc-operator">
+                                <option value="+">+</option>
+                                <option value="-">-</option>
+                                <option value="*">*</option>
+                                <option value="/">/</option>
+                            </select>
+                            <input type="number" id="calc-num2" placeholder="Number 2" value="5">
+                            <button onclick="calculate()">Calculate</button>
+                        </div>
+                        <div id="calc-result" style="font-size: 1.2rem; font-weight: bold;"></div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <h3>Exercise 2: To-Do List</h3>
+                    <p>Create a simple to-do list application.</p>
+                    <div class="demo-box">
+                        <div class="d-flex gap-2 mb-2">
+                            <input type="text" id="todo-input" placeholder="Enter a task" style="flex: 1;">
+                            <button onclick="addTodo()">Add Task</button>
+                        </div>
+                        <ul id="todo-list" style="list-style: none; padding: 0; margin-top: var(--spacing-md);">
+                            <!-- Tasks will be added here -->
+                        </ul>
+                        <div class="mt-2">
+                            <button onclick="clearCompleted()">Clear Completed</button>
+                            <button onclick="clearAllTodos()" class="danger">Clear All</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <h3>Exercise 3: Palindrome Checker</h3>
+                    <p>Write a function that checks if a word is a palindrome (reads the same forward and backward).</p>
+                    <div class="demo-box">
+                        <div class="d-flex gap-2 mb-2">
+                            <input type="text" id="palindrome-input" placeholder="Enter a word" value="racecar" style="flex: 1;">
+                            <button onclick="checkPalindrome()">Check Palindrome</button>
+                        </div>
+                        <div id="palindrome-result"></div>
+                    </div>
+                </div>
+                
+                <h3>Project Ideas:</h3>
+                <ul>
+                    <li>Weather App with API integration</li>
+                    <li>Quiz Game with timer and scoring</li>
+                    <li>Expense Tracker with charts</li>
+                    <li>Recipe Finder with search</li>
+                    <li>Memory Card Game</li>
+                </ul>
+            </section>
+
+            <!-- 14. Quiz -->
+            <section id="quiz">
+                <h2>14. Quiz</h2>
+                
+                <div class="quiz">
+                    <div class="quiz-question">
+                        <h4>Question 1: What does JSON stand for?</h4>
+                        <ul class="quiz-options" data-correct="a">
+                            <li onclick="selectAnswer(this, 1)">a) JavaScript Object Notation</li>
+                            <li onclick="selectAnswer(this, 1)">b) JavaScript Online Network</li>
+                            <li onclick="selectAnswer(this, 1)">c) JavaScript Object Naming</li>
+                            <li onclick="selectAnswer(this, 1)">d) JavaScript Ordered Numbers</li>
+                        </ul>
+                        <div id="feedback-1" class="quiz-feedback"></div>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <h4>Question 2: Which method adds an element to the end of an array?</h4>
+                        <ul class="quiz-options" data-correct="a">
+                            <li onclick="selectAnswer(this, 2)">a) push()</li>
+                            <li onclick="selectAnswer(this, 2)">b) pop()</li>
+                            <li onclick="selectAnswer(this, 2)">c) shift()</li>
+                            <li onclick="selectAnswer(this, 2)">d) unshift()</li>
+                        </ul>
+                        <div id="feedback-2" class="quiz-feedback"></div>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <h4>Question 3: What will `typeof null` return?</h4>
+                        <ul class="quiz-options" data-correct="c">
+                            <li onclick="selectAnswer(this, 3)">a) "null"</li>
+                            <li onclick="selectAnswer(this, 3)">b) "undefined"</li>
+                            <li onclick="selectAnswer(this, 3)">c) "object"</li>
+                            <li onclick="selectAnswer(this, 3)">d) "number"</li>
+                        </ul>
+                        <div id="feedback-3" class="quiz-feedback"></div>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <h4>Question 4: What does the `===` operator check?</h4>
+                        <ul class="quiz-options" data-correct="c">
+                            <li onclick="selectAnswer(this, 4)">a) Value equality only</li>
+                            <li onclick="selectAnswer(this, 4)">b) Type equality only</li>
+                            <li onclick="selectAnswer(this, 4)">c) Both value and type equality</li>
+                            <li onclick="selectAnswer(this, 4)">d) Reference equality</li>
+                        </ul>
+                        <div id="feedback-4" class="quiz-feedback"></div>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <h4>Question 5: Which is NOT a JavaScript data type?</h4>
+                        <ul class="quiz-options" data-correct="c">
+                            <li onclick="selectAnswer(this, 5)">a) symbol</li>
+                            <li onclick="selectAnswer(this, 5)">b) bigint</li>
+                            <li onclick="selectAnswer(this, 5)">c) float</li>
+                            <li onclick="selectAnswer(this, 5)">d) undefined</li>
+                        </ul>
+                        <div id="feedback-5" class="quiz-feedback"></div>
+                    </div>
+                    
+                    <button onclick="checkAllAnswers()" style="width: 100%; margin-top: var(--spacing-md);">Check All Answers</button>
+                    <button onclick="resetQuiz()" style="width: 100%; margin-top: var(--spacing-sm);" class="secondary">Reset Quiz</button>
+                </div>
+                
+                <h3>Code Correction Exercise:</h3>
+                <div class="exercise">
+                    <p>Find and fix the errors in this code:</p>
+                    <pre style="background: #fff3cd; padding: var(--spacing-md); border-radius: var(--border-radius);"><code>function calculateSum(numbers) {
+    let total = 0
+    for (i = 0; i < numbers.length; i++) {
+        total += numbers[i]
+    }
+    return total
+}
+
+const result = calculateSum(1, 2, 3, 4)
+console.log("Result: " result)</code></pre>
+                    <button onclick="showCodeCorrection()" class="mt-2">Show Solution</button>
+                    <div id="code-correction" style="display: none; margin-top: var(--spacing-md);">
+                        <pre style="background: #d4edda; padding: var(--spacing-md); border-radius: var(--border-radius);"><code>// Fixed code:
+function calculateSum(...numbers) {  // Use rest parameter
+    let total = 0;
+    for (let i = 0; i < numbers.length; i++) {  // Add 'let' before i
+        total += numbers[i];
+    }
+    return total;
+}
+
+const result = calculateSum(1, 2, 3, 4);
+console.log("Result: " + result);  // Add + operator</code></pre>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <h3>Code Playground</h3>
+                <div class="playground">
+                    <div class="playground-header">
+                        <span>Live JavaScript Editor</span>
+                        <button onclick="runCustomCode()">Run</button>
+                    </div>
+                    <textarea id="custom-code" class="playground-code" style="min-height: 300px; width: 100%; border: none; font-family: var(--font-mono); color: var(--code-color); background: transparent; resize: vertical;">// Write your JavaScript code here
+// Example: 
+console.log("Hello, World!");
+
+function greet(name) {
+    return `Hello, ${name}!`;
+}
+
+console.log(greet("JavaScript Learner"));
+
+// You can also manipulate the DOM
+// document.body.style.backgroundColor = "#f0f0f0";</textarea>
+                    <div class="playground-output" id="custom-output"></div>
+                </div>
+                <div class="demo-controls" style="margin-top: var(--spacing-sm);">
+                    <button onclick="clearCustomCode()">Clear</button>
+                    <button onclick="loadExampleCode()" class="secondary">Load Example</button>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3>Quick Reference</h3>
+                <table style="font-size: 0.9rem;">
+                    <tr>
+                        <th>Type</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td>String</td>
+                        <td><code>"Hello"</code></td>
+                    </tr>
+                    <tr>
+                        <td>Number</td>
+                        <td><code>42, 3.14</code></td>
+                    </tr>
+                    <tr>
+                        <td>Boolean</td>
+                        <td><code>true, false</code></td>
+                    </tr>
+                    <tr>
+                        <td>Array</td>
+                        <td><code>[1, 2, 3]</code></td>
+                    </tr>
+                    <tr>
+                        <td>Object</td>
+                        <td><code>{key: "value"}</code></td>
+                    </tr>
+                    <tr>
+                        <td>Function</td>
+                        <td><code>() => {}</code></td>
+                    </tr>
+                </table>
+                
+                <h4 style="margin-top: var(--spacing-md);">Common Array Methods:</h4>
+                <ul style="font-size: 0.9rem; padding-left: 20px;">
+                    <li><code>.push()</code> - Add to end</li>
+                    <li><code>.pop()</code> - Remove from end</li>
+                    <li><code>.map()</code> - Transform</li>
+                    <li><code>.filter()</code> - Filter elements</li>
+                    <li><code>.reduce()</code> - Reduce to value</li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3>Resources</h3>
+                <ul style="padding-left: 20px;">
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">MDN JavaScript Docs</a></li>
+                    <li><a href="https://javascript.info/" target="_blank">Modern JavaScript Tutorial</a></li>
+                    <li><a href="https://www.freecodecamp.org/" target="_blank">freeCodeCamp</a></li>
+                    <li><a href="https://codewars.com/" target="_blank">CodeWars Challenges</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <h2>Congratulations on Completing JavaScript Fundamentals! 🎉</h2>
+        <p>You've learned the core concepts of JavaScript programming. Keep practicing and building projects!</p>
+        <p class="mt-2"><strong>Next Steps:</strong> Practice building interactive applications, learn about APIs and asynchronous JavaScript, and explore frameworks like React or Vue.</p>
+        <div class="mt-3">
+            <button onclick="window.print()"><i class="fas fa-print"></i> Print Guide</button>
+            <button onclick="downloadGuide()" class="secondary"><i class="fas fa-download"></i> Download as HTML</button>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================
+        // 1. Introduction
+        // ============================================
+        function runIntroductionCode() {
+            const output = document.getElementById('intro-output');
+            output.innerHTML = '';
+            
+            // Clear previous output
+            output.innerHTML = '';
+            
+            // Create a virtual console
+            const originalLog = console.log;
+            const logs = [];
+            console.log = function(...args) {
+                logs.push(args.join(' '));
+                originalLog.apply(console, args);
+            };
+            
+            // Execute the code
+            try {
+                eval(document.getElementById('intro-code').textContent);
+            } catch (error) {
+                logs.push(`Error: ${error.message}`);
+            }
+            
+            // Restore console.log
+            console.log = originalLog;
+            
+            // Display logs
+            logs.forEach(log => {
+                output.innerHTML += `<div>${log}</div>`;
+            });
+        }
+
+        // ============================================
+        // 2. JavaScript Basics
+        // ============================================
+        function demoConsoleLog() {
+            const output = document.getElementById('console-output');
+            output.innerHTML += '<div style="color: #f8f8f2;">console.log: This is a log message</div>';
+        }
+        
+        function demoConsoleWarn() {
+            const output = document.getElementById('console-output');
+            output.innerHTML += '<div style="color: #ffa500;">console.warn: This is a warning message</div>';
+        }
+        
+        function demoConsoleError() {
+            const output = document.getElementById('console-output');
+            output.innerHTML += '<div style="color: #ff4444;">console.error: This is an error message</div>';
+        }
+        
+        function demoConsoleTable() {
+            const output = document.getElementById('console-output');
+            const data = [
+                { name: 'John', age: 25, city: 'NYC' },
+                { name: 'Jane', age: 30, city: 'LA' },
+                { name: 'Bob', age: 35, city: 'Chicago' }
+            ];
+            
+            let table = '<div style="margin: 10px 0;">console.table:</div>';
+            table += '<table style="width: 100%; border-collapse: collapse; font-size: 12px;">';
+            table += '<tr><th style="border: 1px solid #555; padding: 5px;">Name</th><th style="border: 1px solid #555; padding: 5px;">Age</th><th style="border: 1px solid #555; padding: 5px;">City</th></tr>';
+            
+            data.forEach(row => {
+                table += `<tr>
+                    <td style="border: 1px solid #555; padding: 5px;">${row.name}</td>
+                    <td style="border: 1px solid #555; padding: 5px;">${row.age}</td>
+                    <td style="border: 1px solid #555; padding: 5px;">${row.city}</td>
+                </tr>`;
+            });
+            
+            table += '</table>';
+            output.innerHTML += table;
+        }
+        
+        function demoConsoleGroup() {
+            const output = document.getElementById('console-output');
+            output.innerHTML += `
+                <div style="color: #66d9ef; font-weight: bold;">console.group: User Details</div>
+                <div style="margin-left: 20px;">
+                    <div>Name: John Doe</div>
+                    <div>Age: 30</div>
+                    <div>Email: john@example.com</div>
+                </div>
+                <div style="color: #66d9ef; font-weight: bold;">console.groupEnd</div>
+            `;
+        }
+        
+        function showAlert() {
+            alert('Hello! This is an alert dialog.');
+        }
+        
+        function showConfirm() {
+            const result = confirm('Are you sure you want to continue?');
+            alert(`You clicked: ${result ? 'OK' : 'Cancel'}`);
+        }
+        
+        function showPrompt() {
+            const name = prompt('Please enter your name:', 'JavaScript Learner');
+            if (name) {
+                alert(`Hello, ${name}!`);
+            }
+        }
+
+        // ============================================
+        // 3. Variables and Data Types
+        // ============================================
+        function showDataType(type) {
+            const output = document.getElementById('data-type-output');
+            let result = '';
+            
+            switch(type) {
+                case 'string':
+                    const str = "Hello, JavaScript!";
+                    result = `<code>typeof "${str}"</code> = ${typeof str}`;
+                    break;
+                case 'number':
+                    const num = 42;
+                    result = `<code>typeof ${num}</code> = ${typeof num}`;
+                    break;
+                case 'boolean':
+                    const bool = true;
+                    result = `<code>typeof ${bool}</code> = ${typeof bool}`;
+                    break;
+                case 'array':
+                    const arr = [1, 2, 3];
+                    result = `<code>typeof [1, 2, 3]</code> = ${typeof arr}<br>`;
+                    result += `<code>Array.isArray([1, 2, 3])</code> = ${Array.isArray(arr)}`;
+                    break;
+                case 'object':
+                    const obj = {name: "John"};
+                    result = `<code>typeof {name: "John"}</code> = ${typeof obj}`;
+                    break;
+                case 'null':
+                    const nullVar = null;
+                    result = `<code>typeof null</code> = ${typeof nullVar}`;
+                    break;
+                case 'undefined':
+                    let undef;
+                    result = `<code>typeof undefined</code> = ${typeof undef}`;
+                    break;
+            }
+            
+            output.innerHTML = result;
+        }
+        
+        function runTypeConversion() {
+            const output = document.getElementById('type-conversion-output');
+            output.innerHTML = '';
+            
+            // Capture console output
+            const originalLog = console.log;
+            const logs = [];
+            console.log = function(...args) {
+                logs.push(args.join(' '));
+            };
+            
+            // Execute the code
+            try {
+                eval(document.getElementById('type-conversion-code').textContent);
+            } catch (error) {
+                logs.push(`Error: ${error.message}`);
+            }
+            
+            // Restore console.log
+            console.log = originalLog;
+            
+            // Display output
+            logs.forEach(log => {
+                output.innerHTML += `<div>${log}</div>`;
+            });
+        }
+
+        // ============================================
+        // 4. Operators
+        // ============================================
+        function calculateArithmetic() {
+            const operand1 = parseFloat(document.getElementById('operand1').value);
+            const operand2 = parseFloat(document.getElementById('operand2').value);
+            const operator = document.getElementById('arithmetic-operator').value;
+            
+            let result;
+            switch(operator) {
+                case '+': result = operand1 + operand2; break;
+                case '-': result = operand1 - operand2; break;
+                case '*': result = operand1 * operand2; break;
+                case '/': result = operand1 / operand2; break;
+                case '%': result = operand1 % operand2; break;
+                case '**': result = Math.pow(operand1, operand2); break;
+            }
+            
+            document.getElementById('arithmetic-result').textContent = result;
+        }
+        
+        function checkDrivingEligibility() {
+            const age = parseInt(document.getElementById('driver-age').value);
+            const hasLicense = document.getElementById('has-license').value === 'true';
+            
+            let message = '';
+            let color = '';
+            
+            if (age >= 18 && hasLicense) {
+                message = '✅ You can drive!';
+                color = 'green';
+            } else if (age >= 18 && !hasLicense) {
+                message = '⚠️ You are old enough but need a license.';
+                color = 'orange';
+            } else {
+                message = '❌ You are too young to drive.';
+                color = 'red';
+            }
+            
+            document.getElementById('eligibility-result').innerHTML = 
+                `<div style="color: ${color}; font-weight: bold;">${message}</div>`;
+        }
+
+        // ============================================
+        // 5. Control Flow
+        // ============================================
+        function calculateGrade() {
+            const output = document.getElementById('grade-output');
+            output.innerHTML = '';
+            
+            // Capture console output
+            const originalLog = console.log;
+            const logs = [];
+            console.log = function(...args) {
+                logs.push(args.join(' '));
+            };
+            
+            // Execute the code
+            try {
+                eval(document.getElementById('grade-code').textContent);
+            } catch (error) {
+                logs.push(`Error: ${error.message}`);
+            }
+            
+            // Restore console.log
+            console.log = originalLog;
+            
+            // Display output
+            logs.forEach(log => {
+                output.innerHTML += `<div>${log}</div>`;
+            });
+        }
+        
+        function demoForLoop() {
+            const output = document.getElementById('loop-output');
+            output.innerHTML = '<div>For Loop Output:</div>';
+            for (let i = 0; i < 5; i++) {
+                output.innerHTML += `<div>Iteration ${i + 1}: i = ${i}</div>`;
+            }
+        }
+        
+        function demoWhileLoop() {
+            const output = document.getElementById('loop-output');
+            output.innerHTML = '<div>While Loop Output:</div>';
+            let i = 0;
+            while (i < 5) {
+                output.innerHTML += `<div>Iteration ${i + 1}: i = ${i}</div>`;
+                i++;
+            }
+        }
+        
+        function demoForOfLoop() {
+            const output = document.getElementById('loop-output');
+            output.innerHTML = '<div>For...of Loop Output:</div>';
+            const fruits = ['Apple', 'Banana', 'Orange'];
+            for (const fruit of fruits) {
+                output.innerHTML += `<div>Fruit: ${fruit}</div>`;
+            }
+        }
+        
+        function demoForInLoop() {
+            const output = document.getElementById('loop-output');
+            output.innerHTML = '<div>For...in Loop Output:</div>';
+            const person = {name: 'John', age: 30, city: 'NYC'};
+            for (const key in person) {
+                output.innerHTML += `<div>${key}: ${person[key]}</div>`;
+            }
+        }
+
+        // ============================================
+        // 6. Functions
+        // ============================================
+        function callAddFunction() {
+            const num1 = parseFloat(document.getElementById('func-num1').value);
+            const num2 = parseFloat(document.getElementById('func-num2').value);
+            const result = num1 + num2;
+            document.getElementById('function-result').innerHTML = 
+                `<div style="color: green; font-weight: bold;">${num1} + ${num2} = ${result}</div>`;
+        }
+        
+        function callMultiplyFunction() {
+            const num1 = parseFloat(document.getElementById('func-num1').value);
+            const num2 = parseFloat(document.getElementById('func-num2').value);
+            const result = num1 * num2;
+            document.getElementById('function-result').innerHTML = 
+                `<div style="color: green; font-weight: bold;">${num1} × ${num2} = ${result}</div>`;
+        }
+        
+        function callPowerFunction() {
+            const num1 = parseFloat(document.getElementById('func-num1').value);
+            const num2 = parseFloat(document.getElementById('func-num2').value);
+            const result = Math.pow(num1, num2);
+            document.getElementById('function-result').innerHTML = 
+                `<div style="color: green; font-weight: bold;">${num1}<sup>${num2}</sup> = ${result}</div>`;
+        }
+        
+        function calculateFactorial() {
+            const output = document.getElementById('factorial-output');
+            output.innerHTML = '';
+            
+            // Capture console output
+            const originalLog = console.log;
+            const logs = [];
+            console.log = function(...args) {
+                logs.push(args.join(' '));
+            };
+            
+            // Execute the code
+            try {
+                eval(document.getElementById('factorial-code').textContent);
+            } catch (error) {
+                logs.push(`Error: ${error.message}`);
+            }
+            
+            // Restore console.log
+            console.log = originalLog;
+            
+            // Display output
+            logs.forEach(log => {
+                output.innerHTML += `<div>${log}</div>`;
+            });
+        }
+
+        // ============================================
+        // 7. Arrays
+        // ============================================
+        let demoArray = ["apple", "banana", "orange", "grape", "kiwi"];
+        
+        function updateArrayDisplay() {
+            document.getElementById('array-result').innerHTML = 
+                `<strong>Current Array:</strong> [${demoArray.map(item => `"${item}"`).join(', ')}]`;
+        }
+        
+        function arrayPush() {
+            demoArray.push("melon");
+            updateArrayDisplay();
+        }
+        
+        function arrayPop() {
+            const popped = demoArray.pop();
+            updateArrayDisplay();
+            document.getElementById('array-result').innerHTML += 
+                `<br><em>Removed: "${popped}"</em>`;
+        }
+        
+        function arrayShift() {
+            const shifted = demoArray.shift();
+            updateArrayDisplay();
+            document.getElementById('array-result').innerHTML += 
+                `<br><em>Removed from beginning: "${shifted}"</em>`;
+        }
+        
+        function arrayUnshift() {
+            demoArray.unshift("berry");
+            updateArrayDisplay();
+        }
+        
+        function arraySlice() {
+            const sliced = demoArray.slice(1, 4);
+            updateArrayDisplay();
+            document.getElementById('array-result').innerHTML += 
+                `<br><em>Sliced (1, 4): [${sliced.map(item => `"${item}"`).join(', ')}]</em>`;
+        }
+        
+        function arraySplice() {
+            const removed = demoArray.splice(2, 1, "pear");
+            updateArrayDisplay();
+            document.getElementById('array-result').innerHTML += 
+                `<br><em>Removed: "${removed[0]}", Added: "pear"</em>`;
+        }
+        
+        function resetArray() {
+            demoArray = ["apple", "banana", "orange", "grape", "kiwi"];
+            updateArrayDisplay();
+        }
+        
+        // Initialize array display
+        updateArrayDisplay();
+        
+        function transformArray() {
+            const output = document.getElementById('array-transform-output');
+            output.innerHTML = '';
+            
+            // Capture console output
+            const originalLog = console.log;
+            const logs = [];
+            console.log = function(...args) {
+                logs.push(args.join(' '));
+            };
+            
+            // Execute the code
+            try {
+                eval(document.getElementById('array-transform-code').textContent);
+            } catch (error) {
+                logs.push(`Error: ${error.message}`);
+            }
+            
+            // Restore console.log
+            console.log = originalLog;
+            
+            // Display output
+            logs.forEach(log => {
+                output.innerHTML += `<div>${log}</div>`;
+            });
+        }
+
+        // ============================================
+        // 8. Objects
+        // ============================================
+        let demoPerson = {
+            name: "John Doe",
+            age: 30,
+            city: "New York"
+        };
+        
+        function updateObjectDisplay() {
+            const output = document.getElementById('object-output');
+            output.textContent = JSON.stringify(demoPerson, null, 2);
+        }
+        
+        function createPersonObject() {
+            demoPerson = {
+                name: "John Doe",
+                age: 30,
+                city: "New York"
+            };
+            updateObjectDisplay();
+        }
+        
+        function addProperty() {
+            demoPerson.email = "john@example.com";
+            demoPerson.job = "Developer";
+            updateObjectDisplay();
+        }
+        
+        function updateProperty() {
+            demoPerson.age = 31;
+            demoPerson.city = "San Francisco";
+            updateObjectDisplay();
+        }
+        
+        function deleteProperty() {
+            delete demoPerson.city;
+            updateObjectDisplay();
+        }
+        
+        function showObjectMethods() {
+            const output = document.getElementById('object-output');
+            let result = "Object Methods Demo:\n\n";
+            
+            // Get keys
+            const keys = Object.keys(demoPerson);
+            result += `Object.keys(): [${keys.join(', ')}]\n\n`;
+            
+            // Get values
+            const values = Object.values(demoPerson);
+            result += `Object.values(): [${values.map(v => typeof v === 'string' ? `"${v}"` : v).join(', ')}]\n\n`;
+            
+            // Get entries
+            const entries = Object.entries(demoPerson);
+            result += "Object.entries():\n";
+            entries.forEach(([key, value]) => {
+                result += `  ${key}: ${typeof value === 'string' ? `"${value}"` : value}\n`;
+            });
+            
+            output.textContent = result;
+        }
+        
+        // Initialize object display
+        updateObjectDisplay();
+        
+        function demoDestructuring() {
+            const output = document.getElementById('destructuring-output');
+            output.innerHTML = '';
+            
+            // Capture console output
+            const originalLog = console.log;
+            const logs = [];
+            console.log = function(...args) {
+                logs.push(args.join(' '));
+            };
+            
+            // Execute the code
+            try {
+                eval(document.getElementById('destructuring-code').textContent);
+            } catch (error) {
+                logs.push(`Error: ${error.message}`);
+            }
+            
+            // Restore console.log
+            console.log = originalLog;
+            
+            // Display output
+            logs.forEach(log => {
+                output.innerHTML += `<div>${log}</div>`;
+            });
+        }
+
+        // ============================================
+        // 9. DOM Manipulation
+        // ============================================
+        function changeDomText() {
+            const element = document.getElementById('dom-text');
+            element.textContent = "Text changed using JavaScript!";
+        }
+        
+        function changeDomColor() {
+            const element = document.getElementById('dom-text');
+            element.style.color = element.style.color === 'red' ? 'black' : 'red';
+        }
+        
+        function toggleDomClass() {
+            const element = document.getElementById('dom-text');
+            element.classList.toggle('highlight');
+            
+            // Add CSS for highlight class if not exists
+            if (!document.querySelector('#highlight-style')) {
+                const style = document.createElement('style');
+                style.id = 'highlight-style';
+                style.textContent = '.highlight { background-color: yellow; padding: 5px; border-radius: 4px; }';
+                document.head.appendChild(style);
+            }
+        }
+        
+        function addDomElement() {
+            const container = document.getElementById('dom-container');
+            const newElement = document.createElement('div');
+            newElement.className = 'dom-element';
+            newElement.textContent = `New element added at ${new Date().toLocaleTimeString()}`;
+            newElement.style.padding = '5px';
+            newElement.style.margin = '5px 0';
+            newElement.style.backgroundColor = '#e8f4fc';
+            newElement.style.borderRadius = '4px';
+            container.appendChild(newElement);
+        }
+        
+        function removeDomElement() {
+            const container = document.getElementById('dom-container');
+            if (container.lastChild) {
+                container.removeChild(container.lastChild);
+            }
+        }
+        
+        function handleFormSubmit() {
+            const name = document.getElementById('user-name').value;
+            const email = document.getElementById('user-email').value;
+            const age = document.getElementById('user-age').value;
+            
+            const output = document.getElementById('form-output');
+            output.innerHTML = `
+                <h4>Form Submitted Successfully!</h4>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Age:</strong> ${age || 'Not specified'}</p>
+            `;
+            output.style.display = 'block';
+            
+            // Reset form
+            document.getElementById('user-form').reset();
+        }
+
+        // ============================================
+        // 10. Events
+        // ============================================
+        let eventListenersActive = false;
+        
+        function startEventListeners() {
+            if (eventListenersActive) return;
+            eventListenersActive = true;
+            
+            const box = document.getElementById('event-box');
+            const log = document.getElementById('event-log');
+            
+            function logEvent(event) {
+                log.innerHTML += `<div>[${new Date().toLocaleTimeString()}] ${event.type.toUpperCase()}: ${event.target.id}</div>`;
+            }
+            
+            // Add various event listeners
+            box.addEventListener('click', logEvent);
+            box.addEventListener('mouseenter', logEvent);
+            box.addEventListener('mouseleave', logEvent);
+            box.addEventListener('mousedown', logEvent);
+            box.addEventListener('mouseup', logEvent);
+            
+            log.innerHTML += '<div style="color: #4fc3a1;">Event listeners activated!</div>';
+        }
+        
+        function stopEventListeners() {
+            if (!eventListenersActive) return;
+            eventListenersActive = false;
+            
+            const box = document.getElementById('event-box');
+            const log = document.getElementById('event-log');
+            
+            // Remove event listeners by cloning and replacing
+            const newBox = box.cloneNode(true);
+            box.parentNode.replaceChild(newBox, box);
+            
+            log.innerHTML += '<div style="color: #e74c3c;">Event listeners removed!</div>';
+        }
+        
+        function clearEventLog() {
+            document.getElementById('event-log').innerHTML = '';
+        }
+        
+        // Event delegation for list items
+        document.getElementById('event-list').addEventListener('click', function(event) {
+            if (event.target.classList.contains('event-item')) {
+                const output = document.getElementById('event-delegation-output');
+                output.innerHTML = `Clicked on: ${event.target.textContent}`;
+                event.target.style.backgroundColor = '#4a6fa5';
+                event.target.style.color = 'white';
+                
+                // Reset other items
+                document.querySelectorAll('.event-item').forEach(item => {
+                    if (item !== event.target) {
+                        item.style.backgroundColor = '#f0f0f0';
+                        item.style.color = 'black';
+                    }
+                });
+            }
+        });
+        
+        function addEventItem() {
+            const list = document.getElementById('event-list');
+            const itemCount = list.children.length + 1;
+            const newItem = document.createElement('li');
+            newItem.className = 'event-item';
+            newItem.textContent = `Item ${itemCount}`;
+            newItem.style.padding = '10px';
+            newItem.style.margin = '5px 0';
+            newItem.style.background = '#f0f0f0';
+            newItem.style.borderRadius = '4px';
+            newItem.style.cursor = 'pointer';
+            list.appendChild(newItem);
+        }
+
+        // ============================================
+        // 11. Error Handling
+        // ============================================
+        function parseWithErrorHandling() {
+            const input = document.getElementById('parse-input').value;
+            const resultDiv = document.getElementById('parse-result');
+            const errorDiv = document.getElementById('error-output');
+            
+            errorDiv.style.display = 'none';
+            errorDiv.innerHTML = '';
+            
+            try {
+                const number = parseFloat(input);
+                if (isNaN(number)) {
+                    throw new Error("Input is not a valid number");
+                }
+                resultDiv.innerHTML = `<div style="color: green;">Successfully parsed: ${number}</div>`;
+            } catch (error) {
+                errorDiv.style.display = 'block';
+                errorDiv.innerHTML = `
+                    <div style="color: #721c24;">
+                        <strong>Error caught:</strong> ${error.message}<br>
+                        <small>Stack trace: ${error.stack || 'Not available'}</small>
+                    </div>
+                `;
+                resultDiv.innerHTML = `<div style="color: red;">Failed to parse input</div>`;
+            } finally {
+                console.log("Parsing attempt completed");
+            }
+        }
+        
+        function parseWithoutErrorHandling() {
+            const input = document.getElementById('parse-input').value;
+            const resultDiv = document.getElementById('parse-result');
+            
+            // This will crash if input is not a number
+            const number = parseFloat(input);
+            resultDiv.innerHTML = `<div style="color: green;">Parsed: ${number}</div>`;
+        }
+        
+        function demoCustomErrors() {
+            const output = document.getElementById('custom-error-output');
+            output.innerHTML = '';
+            
+            // Capture console output
+            const originalLog = console.log;
+            const logs = [];
+            console.log = function(...args) {
+                logs.push(args.join(' '));
+            };
+            
+            // Execute the code
+            try {
+                eval(document.getElementById('custom-error-code').textContent);
+            } catch (error) {
+                logs.push(`Error: ${error.message}`);
+            }
+            
+            // Restore console.log
+            console.log = originalLog;
+            
+            // Display output
+            logs.forEach(log => {
+                output.innerHTML += `<div>${log}</div>`;
+            });
+        }
+
+        // ============================================
+        // 12. ES6+ Features
+        // ============================================
+        function demoScope() {
+            const output = document.getElementById('scope-output');
+            output.innerHTML = '';
+            
+            // Capture console output
+            const originalLog = console.log;
+            const logs = [];
+            console.log = function(...args) {
+                logs.push(args.join(' '));
+            };
+            
+            // Execute the code
+            try {
+                eval(document.getElementById('scope-code').textContent);
+            } catch (error) {
+                logs.push(`Error: ${error.message}`);
+            }
+            
+            // Restore console.log
+            console.log = originalLog;
+            
+            // Display output
+            logs.forEach(log => {
+                output.innerHTML += `<div>${log}</div>`;
+            });
+        }
+        
+        function demoTemplateLiterals() {
+            const output = document.getElementById('es6-output');
+            const name = "JavaScript Learner";
+            const age = 25;
+            const city = "Digital World";
+            
+            const message = `Hello, my name is ${name}. 
+I am ${age} years old and I live in ${city}.
+In 5 years, I will be ${age + 5} years old.`;
+            
+            output.innerHTML = `<div style="white-space: pre-wrap;">${message}</div>`;
+        }
+        
+        function demoDestructuringES6() {
+            const output = document.getElementById('es6-output');
+            
+            const user = {
+                firstName: "John",
+                lastName: "Doe",
+                age: 30,
+                address: {
+                    street: "123 Main St",
+                    city: "New York"
+                }
+            };
+            
+            // Destructuring
+            const { firstName, lastName, age } = user;
+            const { address: { city } } = user;
+            
+            output.innerHTML = `
+                <div>First Name: ${firstName}</div>
+                <div>Last Name: ${lastName}</div>
+                <div>Age: ${age}</div>
+                <div>City: ${city}</div>
+            `;
+        }
+        
+        function demoSpreadOperator() {
+            const output = document.getElementById('es6-output');
+            
+            const arr1 = [1, 2, 3];
+            const arr2 = [4, 5, 6];
+            const combined = [...arr1, ...arr2];
+            
+            const obj1 = { a: 1, b: 2 };
+            const obj2 = { c: 3, d: 4 };
+            const merged = { ...obj1, ...obj2 };
+            
+            output.innerHTML = `
+                <div>Array 1: [${arr1}]</div>
+                <div>Array 2: [${arr2}]</div>
+                <div>Combined: [${combined}]</div>
+                <br>
+                <div>Object 1: ${JSON.stringify(obj1)}</div>
+                <div>Object 2: ${JSON.stringify(obj2)}</div>
+                <div>Merged: ${JSON.stringify(merged)}</div>
+            `;
+        }
+        
+        function demoRestParameters() {
+            const output = document.getElementById('es6-output');
+            
+            function sum(...numbers) {
+                return numbers.reduce((total, num) => total + num, 0);
+            }
+            
+            const result = sum(1, 2, 3, 4, 5);
+            output.innerHTML = `<div>Sum of 1, 2, 3, 4, 5 = ${result}</div>`;
+        }
+        
+        function demoClasses() {
+            const output = document.getElementById('class-output');
+            output.innerHTML = '';
+            
+            // Capture console output
+            const originalLog = console.log;
+            const logs = [];
+            console.log = function(...args) {
+                logs.push(args.join(' '));
+            };
+            
+            // Execute the code
+            try {
+                eval(document.getElementById('class-code').textContent);
+            } catch (error) {
+                logs.push(`Error: ${error.message}`);
+            }
+            
+            // Restore console.log
+            console.log = originalLog;
+            
+            // Display output
+            logs.forEach(log => {
+                output.innerHTML += `<div>${log}</div>`;
+            });
+        }
+
+        // ============================================
+        // 13. Exercises
+        // ============================================
+        function calculate() {
+            const num1 = parseFloat(document.getElementById('calc-num1').value);
+            const num2 = parseFloat(document.getElementById('calc-num2').value);
+            const operator = document.getElementById('calc-operator').value;
+            
+            let result;
+            switch(operator) {
+                case '+': result = num1 + num2; break;
+                case '-': result = num1 - num2; break;
+                case '*': result = num1 * num2; break;
+                case '/': result = num1 / num2; break;
+            }
+            
+            document.getElementById('calc-result').innerHTML = 
+                `<div style="color: #4a6fa5; font-size: 1.5rem;">${num1} ${operator} ${num2} = ${result}</div>`;
+        }
+        
+        let todoId = 0;
+        
+        function addTodo() {
+            const input = document.getElementById('todo-input');
+            const text = input.value.trim();
+            
+            if (!text) {
+                alert('Please enter a task');
+                return;
+            }
+            
+            const list = document.getElementById('todo-list');
+            const li = document.createElement('li');
+            li.id = `todo-${todoId++}`;
+            li.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px; padding: 8px; background: #f8f9fa; margin-bottom: 5px; border-radius: 4px;">
+                    <input type="checkbox" onchange="toggleTodo(${li.id})">
+                    <span style="flex: 1;">${text}</span>
+                    <button onclick="removeTodo('${li.id}')" style="background: #e74c3c; color: white; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer;">×</button>
+                </div>
+            `;
+            list.appendChild(li);
+            input.value = '';
+        }
+        
+        function toggleTodo(id) {
+            const li = document.getElementById(id);
+            const span = li.querySelector('span');
+            span.style.textDecoration = span.style.textDecoration === 'line-through' ? '' : 'line-through';
+        }
+        
+        function removeTodo(id) {
+            const li = document.getElementById(id);
+            li.remove();
+        }
+        
+        function clearCompleted() {
+            document.querySelectorAll('#todo-list li').forEach(li => {
+                const span = li.querySelector('span');
+                if (span.style.textDecoration === 'line-through') {
+                    li.remove();
+                }
+            });
+        }
+        
+        function clearAllTodos() {
+            document.getElementById('todo-list').innerHTML = '';
+        }
+        
+        function checkPalindrome() {
+            const input = document.getElementById('palindrome-input').value.toLowerCase().replace(/[^a-z0-9]/g, '');
+            const reversed = input.split('').reverse().join('');
+            const isPalindrome = input === reversed;
+            
+            const resultDiv = document.getElementById('palindrome-result');
+            if (isPalindrome) {
+                resultDiv.innerHTML = `<div style="color: green; font-weight: bold;">"${document.getElementById('palindrome-input').value}" is a palindrome! ✓</div>`;
+            } else {
+                resultDiv.innerHTML = `<div style="color: red; font-weight: bold;">"${document.getElementById('palindrome-input').value}" is NOT a palindrome ✗</div>`;
+            }
+        }
+
+        // ============================================
+        // 14. Quiz
+        // ============================================
+        function selectAnswer(element, questionNum) {
+            // Remove selected class from all options in this question
+            const options = element.parentElement.querySelectorAll('li');
+            options.forEach(opt => opt.classList.remove('selected'));
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+        }
+        
+        function checkAllAnswers() {
+            const questions = document.querySelectorAll('.quiz-question');
+            let correctCount = 0;
+            
+            questions.forEach((question, index) => {
+                const options = question.querySelectorAll('.quiz-options li');
+                const correctAnswer = question.querySelector('.quiz-options').dataset.correct;
+                const feedback = document.getElementById(`feedback-${index + 1}`);
+                
+                let selected = null;
+                options.forEach(opt => {
+                    if (opt.classList.contains('selected')) {
+                        selected = opt.textContent.charAt(0);
+                    }
+                });
+                
+                if (selected === correctAnswer) {
+                    feedback.textContent = 'Correct! ✓';
+                    feedback.className = 'quiz-feedback correct';
+                    correctCount++;
+                } else if (selected) {
+                    feedback.textContent = `Incorrect. The correct answer is ${correctAnswer.toUpperCase()}.`;
+                    feedback.className = 'quiz-feedback incorrect';
+                } else {
+                    feedback.textContent = 'Please select an answer.';
+                    feedback.className = 'quiz-feedback incorrect';
+                }
+            });
+            
+            // Show overall score
+            const quizDiv = document.querySelector('.quiz');
+            let scoreDisplay = quizDiv.querySelector('.score-display');
+            if (!scoreDisplay) {
+                scoreDisplay = document.createElement('div');
+                scoreDisplay.className = 'score-display';
+                quizDiv.appendChild(scoreDisplay);
+            }
+            
+            scoreDisplay.innerHTML = `
+                <div style="margin-top: 20px; padding: 15px; background: ${correctCount >= 3 ? '#d4edda' : '#f8d7da'}; border-radius: 8px;">
+                    <h4>Quiz Results: ${correctCount}/${questions.length}</h4>
+                    <p>${correctCount >= 3 ? 'Great job! 🎉' : 'Keep practicing! 💪'}</p>
+                </div>
+            `;
+        }
+        
+        function resetQuiz() {
+            // Clear all selections
+            document.querySelectorAll('.quiz-options li').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Clear all feedback
+            document.querySelectorAll('.quiz-feedback').forEach(fb => {
+                fb.textContent = '';
+                fb.className = 'quiz-feedback';
+                fb.style.display = 'none';
+            });
+            
+            // Remove score display
+            const scoreDisplay = document.querySelector('.score-display');
+            if (scoreDisplay) {
+                scoreDisplay.remove();
+            }
+        }
+        
+        function showCodeCorrection() {
+            document.getElementById('code-correction').style.display = 'block';
+        }
+
+        // ============================================
+        // Sidebar Code Playground
+        // ============================================
+        function runCustomCode() {
+            const code = document.getElementById('custom-code').value;
+            const output = document.getElementById('custom-output');
+            output.innerHTML = '';
+            
+            // Capture console output
+            const originalLog = console.log;
+            const logs = [];
+            console.log = function(...args) {
+                logs.push(args.map(arg => {
+                    if (typeof arg === 'object') {
+                        try {
+                            return JSON.stringify(arg, null, 2);
+                        } catch {
+                            return String(arg);
+                        }
+                    }
+                    return String(arg);
+                }).join(' '));
+            };
+            
+            // Also capture errors
+            const originalError = console.error;
+            console.error = function(...args) {
+                logs.push(`<span style="color: #ff4444;">ERROR: ${args.join(' ')}</span>`);
+            };
+            
+            // Execute the code
+            try {
+                const result = eval(code);
+                if (result !== undefined) {
+                    logs.push(`<span style="color: #4fc3a1;">Result: ${result}</span>`);
+                }
+            } catch (error) {
+                logs.push(`<span style="color: #ff4444;">Runtime Error: ${error.message}</span>`);
+            }
+            
+            // Restore console methods
+            console.log = originalLog;
+            console.error = originalError;
+            
+            // Display output
+            logs.forEach(log => {
+                output.innerHTML += `<div>${log}</div>`;
+            });
+        }
+        
+        function clearCustomCode() {
+            document.getElementById('custom-code').value = '';
+            document.getElementById('custom-output').innerHTML = '';
+        }
+        
+        function loadExampleCode() {
+            const exampleCode = `// Advanced Example: Shopping Cart System
+
+class Product {
+    constructor(name, price) {
+        this.name = name;
+        this.price = price;
+        this.id = Math.random().toString(36).substr(2, 9);
+    }
+    
+    display() {
+        return \`\${this.name} - $\${this.price.toFixed(2)}\`;
+    }
+}
+
+class ShoppingCart {
+    constructor() {
+        this.items = [];
+        this.total = 0;
+    }
+    
+    addItem(product, quantity = 1) {
+        const existingItem = this.items.find(item => item.product.id === product.id);
+        
+        if (existingItem) {
+            existingItem.quantity += quantity;
+        } else {
+            this.items.push({ product, quantity });
+        }
+        
+        this.calculateTotal();
+    }
+    
+    removeItem(productId) {
+        this.items = this.items.filter(item => item.product.id !== productId);
+        this.calculateTotal();
+    }
+    
+    calculateTotal() {
+        this.total = this.items.reduce((sum, item) => {
+            return sum + (item.product.price * item.quantity);
+        }, 0);
+    }
+    
+    displayCart() {
+        console.log("=== Shopping Cart ===");
+        this.items.forEach((item, index) => {
+            console.log(\`\${index + 1}. \${item.product.display()} x \${item.quantity}\`);
+        });
+        console.log(\`Total: $\${this.total.toFixed(2)}\`);
+        console.log("====================");
+    }
+}
+
+// Create products
+const products = [
+    new Product("JavaScript Book", 29.99),
+    new Product("Coffee Mug", 15.50),
+    new Product("T-shirt", 24.99)
+];
+
+// Create cart and add items
+const cart = new ShoppingCart();
+cart.addItem(products[0], 2); // 2 JavaScript Books
+cart.addItem(products[1]);    // 1 Coffee Mug
+cart.addItem(products[2], 3); // 3 T-shirts
+
+// Display cart
+cart.displayCart();
+
+// Remove an item
+console.log("\\nRemoving Coffee Mug...");
+cart.removeItem(products[1].id);
+cart.displayCart();`;
+            
+            document.getElementById('custom-code').value = exampleCode;
+        }
+
+        // ============================================
+        // Utility Functions
+        // ============================================
+        function downloadGuide() {
+            const content = document.documentElement.outerHTML;
+            const blob = new Blob([content], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'javascript-fundamentals-guide.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Initialize arrays and objects displays
+            updateArrayDisplay();
+            updateObjectDisplay();
+            
+            // Load initial example in playground
+            loadExampleCode();
+        });
+    </script>
+</body>
+</html>
