@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Paradise | Authentic Italian Pizza</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/images/logo.png">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <img src="assets/images/logo.png" alt="Pizza Paradise Logo">
+                    <span>Pizza Paradise</span>
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#menu" class="nav-link">Menu</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#special" class="nav-link">Special</a></li>
+                    <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li class="nav-cta">
+                        <a href="tel:+11234567890" class="btn btn-secondary">
+                            <i class="fas fa-phone"></i> Order Now
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Authentic Italian <span class="highlight">Pizza</span> Made with Love</h1>
+                <p class="hero-subtitle">Handcrafted with the finest ingredients, baked in a traditional wood-fired oven, delivered hot to your door.</p>
+                <div class="hero-buttons">
+                    <a href="#menu" class="btn btn-primary">View Our Menu</a>
+                    <a href="tel:+11234567890" class="btn btn-secondary">
+                        <i class="fas fa-bolt"></i> Fast Delivery
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3>500+</h3>
+                        <p>Happy Customers</p>
+                    </div>
+                    <div class="stat">
+                        <h3>50+</h3>
+                        <p>Pizza Varieties</p>
+                    </div>
+                    <div class="stat">
+                        <h3>30 min</h3>
+                        <p>Delivery Guarantee</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/images/pizza-1.jpg" alt="Delicious Pizza">
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section" id="menu">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Pizza Menu</h2>
+                <p class="section-subtitle">Hand-tossed dough, premium toppings, and our secret sauce recipe</p>
+            </div>
+            
+            <div class="menu-categories">
+                <button class="category-btn active" data-category="all">All Pizzas</button>
+                <button class="category-btn" data-category="vegetarian">Vegetarian</button>
+                <button class="category-btn" data-category="meat">Meat Lovers</button>
+                <button class="category-btn" data-category="specialty">Specialty</button>
+            </div>
+            
+            <div class="menu-grid">
+                <!-- Pizza 1 -->
+                <div class="menu-item" data-category="vegetarian">
+                    <div class="menu-item-img">
+                        <img src="assets/images/pizza-1.jpg" alt="Margherita Pizza">
+                        <span class="menu-badge">Best Seller</span>
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Classic Margherita</h3>
+                        <p>Fresh mozzarella, basil, tomato sauce, extra virgin olive oil</p>
+                        <div class="menu-item-footer">
+                            <span class="price">$14.99</span>
+                            <button class="btn-add-to-cart" data-id="1">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pizza 2 -->
+                <div class="menu-item" data-category="meat">
+                    <div class="menu-item-img">
+                        <img src="assets/images/pizza-2.jpg" alt="Pepperoni Pizza">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Double Pepperoni</h3>
+                        <p>Double layer of spicy pepperoni, mozzarella, tomato sauce</p>
+                        <div class="menu-item-footer">
+                            <span class="price">$17.99</span>
+                            <button class="btn-add-to-cart" data-id="2">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pizza 3 -->
+                <div class="menu-item" data-category="vegetarian">
+                    <div class="menu-item-img">
+                        <img src="assets/images/pizza-3.jpg" alt="Veggie Delight Pizza">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Veggie Delight</h3>
+                        <p>Bell peppers, mushrooms, onions, olives, tomatoes, mozzarella</p>
+                        <div class="menu-item-footer">
+                            <span class="price">$16.99</span>
+                            <button class="btn-add-to-cart" data-id="3">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pizza 4 -->
+                <div class="menu-item" data-category="meat">
+                    <div class="menu-item-img">
+                        <img src="assets/images/pizza-4.jpg" alt="BBQ Chicken Pizza">
+                        <span class="menu-badge new">New</span>
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>BBQ Chicken</h3>
+                        <p>Grilled chicken, BBQ sauce, red onions, cilantro, mozzarella</p>
+                        <div class="menu-item-footer">
+                            <span class="price">$18.99</span>
+                            <button class="btn-add-to-cart" data-id="4">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pizza 5 -->
+                <div class="menu-item" data-category="specialty">
+                    <div class="menu-item-img">
+                        <img src="assets/images/pizza-5.jpg" alt="Truffle Pizza">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Truffle Mushroom</h3>
+                        <p>Wild mushrooms, truffle oil, Parmesan, mozzarella, fresh thyme</p>
+                        <div class="menu-item-footer">
+                            <span class="price">$22.99</span>
+                            <button class="btn-add-to-cart" data-id="5">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pizza 6 -->
+                <div class="menu-item" data-category="meat">
+                    <div class="menu-item-img">
+                        <img src="assets/images/pizza-6.jpg" alt="Meat Feast Pizza">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Meat Feast</h3>
+                        <p>Pepperoni, sausage, ham, bacon, ground beef, mozzarella</p>
+                        <div class="menu-item-footer">
+                            <span class="price">$20.99</span>
+                            <button class="btn-add-to-cart" data-id="6">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pizza 7 -->
+                <div class="menu-item" data-category="vegetarian">
+                    <div class="menu-item-img">
+                        <img src="assets/images/pizza-7.jpg" alt="Four Cheese Pizza">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Four Cheese</h3>
+                        <p>Mozzarella, Parmesan, Gorgonzola, Fontina, tomato sauce</p>
+                        <div class="menu-item-footer">
+                            <span class="price">$17.99</span>
+                            <button class="btn-add-to-cart" data-id="7">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pizza 8 -->
+                <div class="menu-item" data-category="specialty">
+                    <div class="menu-item-img">
+                        <img src="assets/images/pizza-8.jpg" alt="Hawaiian Pizza">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Hawaiian Special</h3>
+                        <p>Ham, pineapple, mozzarella, tomato sauce with a hint of BBQ</p>
+                        <div class="menu-item-footer">
+                            <span class="price">$16.99</span>
+                            <button class="btn-add-to-cart" data-id="8">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="view-all-container">
+                <a href="#" class="btn btn-outline">View Full Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="assets/images/about-image.jpg" alt="Our Restaurant Interior">
+                    <div class="experience-badge">
+                        <h3>15+ Years</h3>
+                        <p>Of Experience</p>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <h2 class="section-title">Our Pizza Story</h2>
+                    <p>Founded in 2008, Pizza Paradise began as a small family-owned pizzeria with a passion for authentic Italian flavors. Our founder, Giovanni Rossi, brought his grandmother's secret recipes from Naples, Italy.</p>
+                    
+                    <div class="about-features">
+                        <div class="feature">
+                            <i class="fas fa-fire"></i>
+                            <div>
+                                <h4>Wood-Fired Oven</h4>
+                                <p>Traditional brick oven at 900°F for perfect crispiness</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-seedling"></i>
+                            <div>
+                                <h4>Fresh Ingredients</h4>
+                                <p>Locally sourced vegetables and imported Italian cheeses</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-award"></i>
+                            <div>
+                                <h4>Award Winning</h4>
+                                <p>Best Pizza in City award 2020, 2021, 2022</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#special" class="btn btn-primary">Our Special Pizzas</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Pizza Section -->
+    <section class="special-section" id="special">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Today's Special</h2>
+                <p class="section-subtitle">Limited time offers - Don't miss out!</p>
+            </div>
+            
+            <div class="special-offer">
+                <div class="special-content">
+                    <span class="special-badge">Special Offer</span>
+                    <h3>Paradise Supreme Pizza</h3>
+                    <p>Our signature pizza with pepperoni, Italian sausage, mushrooms, green peppers, onions, and black olives. Topped with extra mozzarella and our special seasoning blend.</p>
+                    
+                    <div class="special-price">
+                        <span class="old-price">$24.99</span>
+                        <span class="new-price">$19.99</span>
+                        <span class="discount">20% OFF</span>
+                    </div>
+                    
+                    <div class="special-timer">
+                        <h4>Offer ends in:</h4>
+                        <div class="timer">
+                            <div class="timer-item">
+                                <span id="hours">12</span>
+                                <p>Hours</p>
+                            </div>
+                            <div class="timer-item">
+                                <span id="minutes">45</span>
+                                <p>Minutes</p>
+                            </div>
+                            <div class="timer-item">
+                                <span id="seconds">30</span>
+                                <p>Seconds</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary btn-special-order">Order Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+                
+                <div class="special-image">
+                    <img src="assets/images/hero-bg.jpg" alt="Paradise Supreme Pizza">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What Our Customers Say</h2>
+                <p class="section-subtitle">Rated 4.9/5 stars from 500+ reviews</p>
+            </div>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial">
+                    <div class="testimonial-header">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Customer">
+                        <div>
+                            <h4>Michael Johnson</h4>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"The best pizza I've had outside of Italy! The crust is perfectly crispy and the ingredients are always fresh. Delivery is always on time."</p>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-header">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Customer">
+                        <div>
+                            <h4>Sarah Williams</h4>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"Their veggie delight pizza is amazing! As a vegetarian, it's hard to find great pizza options. Pizza Paradise never disappoints."</p>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-header">
+                        <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Customer">
+                        <div>
+                            <h4>Robert Chen</h4>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"The truffle mushroom pizza is worth every penny! Such unique flavors. I order from Pizza Paradise every Friday for family night."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="logo">
+                        <img src="assets/images/logo.png" alt="Pizza Paradise Logo">
+                        <span>Pizza Paradise</span>
+                    </div>
+                    <p>Serving authentic Italian pizza since 2008. Fresh ingredients, traditional recipes, and fast delivery.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#special">Special Offers</a></li>
+                        <li><a href="#testimonials">Reviews</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Pizza Street, Naples District</li>
+                        <li><i class="fas fa-phone"></i> (123) 456-7890</li>
+                        <li><i class="fas fa-envelope"></i> info@pizzaparadise.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sun: 11AM - 11PM</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe for exclusive deals and pizza tips!</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Pizza Paradise. All rights reserved. | Designed with Priya <i class="fas fa-heart"></i> for pizza lovers</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Order</h3>
+            <button class="cart-close">&times;</button>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be added dynamically -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-price">$0.00</span>
+            </div>
+            <button class="btn btn-primary btn-checkout">Proceed to Checkout</button>
+        </div>
+    </div>
+    
+    <!-- Cart Icon -->
+    <div class="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+    </div>
+
+    <!-- Back to Top -->
+    <button class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
