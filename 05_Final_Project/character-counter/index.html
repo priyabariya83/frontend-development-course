@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CharCounter | Real-time Character Counter</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/icons/copy.svg">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-text-height"></i>
+                    <h1>CharCounter</h1>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-menu">
+                        <li><a href="#counter" class="nav-link active">Counter</a></li>
+                        <li><a href="#features" class="nav-link">Features</a></li>
+                        <li><a href="#stats" class="nav-link">Statistics</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Real-time Character Counter <span class="highlight">with Debouncing</span></h1>
+                <p class="hero-subtitle">Count characters, words, sentences, and paragraphs instantly with performance-optimized debouncing. Perfect for writers, developers, and content creators.</p>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>50ms</h3>
+                            <p>Debounce Delay</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>99.9%</h3>
+                            <p>Performance</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-infinity"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Unlimited</h3>
+                            <p>Text Length</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Counter Section -->
+    <section class="counter-section" id="counter">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Character Counter</h2>
+                <p class="section-subtitle">Start typing and watch real-time statistics update with debounced performance</p>
+            </div>
+
+            <div class="counter-container">
+                <div class="input-container">
+                    <div class="input-header">
+                        <h3>Your Text</h3>
+                        <div class="input-actions">
+                            <button class="btn btn-icon" id="clearBtn" title="Clear Text">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="btn btn-icon" id="pasteBtn" title="Paste from Clipboard">
+                                <i class="fas fa-paste"></i>
+                            </button>
+                            <button class="btn btn-icon" id="sampleBtn" title="Load Sample Text">
+                                <i class="fas fa-file-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="textarea-container">
+                        <textarea 
+                            id="textInput" 
+                            placeholder="Start typing here... Or paste your text to analyze it. You'll see real-time statistics updating as you type with optimized debouncing for performance."
+                            rows="12"
+                            autofocus
+                        ></textarea>
+                        <div class="textarea-footer">
+                            <span class="hint">Press <kbd>Tab</kbd> to indent, <kbd>Shift + Tab</kbd> to unindent</span>
+                            <div class="text-actions">
+                                <button class="btn btn-small" id="speakBtn">
+                                    <i class="fas fa-volume-up"></i> Speak
+                                </button>
+                                <button class="btn btn-small" id="stopSpeakBtn">
+                                    <i class="fas fa-stop"></i> Stop
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-container">
+                    <!-- Real-time Stats Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-box primary">
+                            <div class="stat-header">
+                                <i class="fas fa-font"></i>
+                                <h4>Characters</h4>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="charCount">0</div>
+                                <div class="stat-details">
+                                    <span class="stat-label">Total</span>
+                                    <div class="stat-subvalues">
+                                        <div class="subvalue">
+                                            <span class="label">Letters:</span>
+                                            <span class="value" id="letterCount">0</span>
+                                        </div>
+                                        <div class="subvalue">
+                                            <span class="label">Digits:</span>
+                                            <span class="value" id="digitCount">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stat-box secondary">
+                            <div class="stat-header">
+                                <i class="fas fa-file-word"></i>
+                                <h4>Words</h4>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="wordCount">0</div>
+                                <div class="stat-details">
+                                    <span class="stat-label">Total</span>
+                                    <div class="stat-subvalues">
+                                        <div class="subvalue">
+                                            <span class="label">Unique:</span>
+                                            <span class="value" id="uniqueWordCount">0</span>
+                                        </div>
+                                        <div class="subvalue">
+                                            <span class="label">Avg Length:</span>
+                                            <span class="value" id="avgWordLength">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stat-box accent">
+                            <div class="stat-header">
+                                <i class="fas fa-sentence"></i>
+                                <h4>Sentences</h4>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="sentenceCount">0</div>
+                                <div class="stat-details">
+                                    <span class="stat-label">Total</span>
+                                    <div class="stat-subvalues">
+                                        <div class="subvalue">
+                                            <span class="label">Avg Length:</span>
+                                            <span class="value" id="avgSentenceLength">0</span>
+                                        </div>
+                                        <div class="subvalue">
+                                            <span class="label">Words/Sentence:</span>
+                                            <span class="value" id="wordsPerSentence">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stat-box success">
+                            <div class="stat-header">
+                                <i class="fas fa-paragraph"></i>
+                                <h4>Paragraphs</h4>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="paragraphCount">0</div>
+                                <div class="stat-details">
+                                    <span class="stat-label">Total</span>
+                                    <div class="stat-subvalues">
+                                        <div class="subvalue">
+                                            <span class="label">Avg Length:</span>
+                                            <span class="value" id="avgParagraphLength">0</span>
+                                        </div>
+                                        <div class="subvalue">
+                                            <span class="label">Sentences/Paragraph:</span>
+                                            <span class="value" id="sentencesPerParagraph">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Statistics -->
+                    <div class="advanced-stats">
+                        <h3>Advanced Statistics</h3>
+                        <div class="advanced-grid">
+                            <div class="advanced-stat">
+                                <div class="advanced-header">
+                                    <i class="fas fa-clock"></i>
+                                    <h4>Reading Time</h4>
+                                </div>
+                                <div class="advanced-content">
+                                    <div class="advanced-value" id="readingTime">0 min</div>
+                                    <div class="advanced-details">
+                                        <div class="detail-item">
+                                            <span class="label">Slow (150 WPM):</span>
+                                            <span class="value" id="slowReadingTime">0 min</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">Fast (250 WPM):</span>
+                                            <span class="value" id="fastReadingTime">0 min</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="advanced-stat">
+                                <div class="advanced-header">
+                                    <i class="fas fa-keyboard"></i>
+                                    <h4>Typing Stats</h4>
+                                </div>
+                                <div class="advanced-content">
+                                    <div class="advanced-value" id="typingSpeed">0 WPM</div>
+                                    <div class="advanced-details">
+                                        <div class="detail-item">
+                                            <span class="label">Characters/Min:</span>
+                                            <span class="value" id="charsPerMinute">0</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">Time to Type:</span>
+                                            <span class="value" id="timeToType">0 min</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="advanced-stat">
+                                <div class="advanced-header">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <h4>Character Distribution</h4>
+                                </div>
+                                <div class="advanced-content">
+                                    <div class="distribution">
+                                        <div class="dist-item">
+                                            <span class="dist-label">Uppercase:</span>
+                                            <div class="dist-bar-container">
+                                                <div class="dist-bar" id="uppercaseBar"></div>
+                                                <span class="dist-value" id="uppercasePercent">0%</span>
+                                            </div>
+                                        </div>
+                                        <div class="dist-item">
+                                            <span class="dist-label">Lowercase:</span>
+                                            <div class="dist-bar-container">
+                                                <div class="dist-bar" id="lowercaseBar"></div>
+                                                <span class="dist-value" id="lowercasePercent">0%</span>
+                                            </div>
+                                        </div>
+                                        <div class="dist-item">
+                                            <span class="dist-label">Spaces:</span>
+                                            <div class="dist-bar-container">
+                                                <div class="dist-bar" id="spacesBar"></div>
+                                                <span class="dist-value" id="spacesPercent">0%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" id="copyBtn">
+                            <i class="fas fa-copy"></i> Copy Statistics
+                        </button>
+                        <button class="btn btn-secondary" id="downloadBtn">
+                            <i class="fas fa-download"></i> Download Report
+                        </button>
+                        <button class="btn btn-outline" id="shareBtn">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
+                    </div>
+
+                    <!-- Debouncing Indicator -->
+                    <div class="debounce-indicator" id="debounceIndicator">
+                        <div class="indicator-header">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <h4>Debouncing Active</h4>
+                            <span class="indicator-badge">50ms</span>
+                        </div>
+                        <div class="indicator-content">
+                            <p>Updates are debounced for optimal performance. Statistics update 50ms after you stop typing.</p>
+                            <div class="debounce-controls">
+                                <label for="debounceSlider">Debounce Delay:</label>
+                                <div class="slider-container">
+                                    <input type="range" id="debounceSlider" min="0" max="1000" value="50" step="10">
+                                    <span id="debounceValue">50ms</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Advanced Features</h2>
+                <p class="section-subtitle">Powerful tools for text analysis and optimization</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Debounced Updates</h3>
+                    <p>Real-time counting with configurable debouncing to prevent performance issues during rapid typing.</p>
+                    <div class="feature-tags">
+                        <span class="tag">Performance</span>
+                        <span class="tag">Optimized</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3>Detailed Analytics</h3>
+                    <p>Comprehensive statistics including character distribution, reading time, and typing metrics.</p>
+                    <div class="feature-tags">
+                        <span class="tag">Analytics</span>
+                        <span class="tag">Insights</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-text-height"></i>
+                    </div>
+                    <h3>Text Processing</h3>
+                    <p>Smart detection of words, sentences, paragraphs with advanced linguistic analysis.</p>
+                    <div class="feature-tags">
+                        <span class="tag">NLP</span>
+                        <span class="tag">Smart</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3>Export Options</h3>
+                    <p>Download detailed reports, copy statistics, or share results across platforms.</p>
+                    <div class="feature-tags">
+                        <span class="tag">Export</span>
+                        <span class="tag">Share</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Customizable UI</h3>
+                    <p>Dark/light theme, adjustable debouncing delay, and personalized settings.</p>
+                    <div class="feature-tags">
+                        <span class="tag">Themes</span>
+                        <span class="tag">Custom</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    <h3>Text-to-Speech</h3>
+                    <p>Listen to your text with built-in speech synthesis for proofreading and accessibility.</p>
+                    <div class="feature-tags">
+                        <span class="tag">Accessibility</span>
+                        <span class="tag">TTS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Visualization -->
+    <section class="visualization-section" id="stats">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Live Statistics Visualization</h2>
+                <p class="section-subtitle">Watch your text statistics update in real-time with animated charts</p>
+            </div>
+
+            <div class="visualization-container">
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Character Distribution</h3>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <span class="legend-color" style="background-color: var(--primary-color);"></span>
+                                <span>Letters</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background-color: var(--secondary-color);"></span>
+                                <span>Digits</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background-color: var(--accent-color);"></span>
+                                <span>Spaces</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background-color: var(--success-color);"></span>
+                                <span>Punctuation</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart" id="charDistributionChart">
+                        <canvas id="distributionCanvas"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Word Frequency</h3>
+                        <div class="chart-controls">
+                            <button class="btn btn-small" id="showTopWords">Top 10</button>
+                            <button class="btn btn-small" id="showAllWords">All Words</button>
+                        </div>
+                    </div>
+                    <div class="chart" id="wordFrequencyChart">
+                        <div class="frequency-list" id="frequencyList">
+                            <!-- Word frequency items will be added here -->
+                            <div class="empty-state">
+                                <i class="fas fa-chart-bar"></i>
+                                <p>Start typing to see word frequency analysis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-history">
+                    <h3>Statistics History</h3>
+                    <div class="history-container">
+                        <div class="history-stats">
+                            <div class="history-stat">
+                                <span class="history-label">Peak Characters:</span>
+                                <span class="history-value" id="peakChars">0</span>
+                            </div>
+                            <div class="history-stat">
+                                <span class="history-label">Peak Words:</span>
+                                <span class="history-value" id="peakWords">0</span>
+                            </div>
+                            <div class="history-stat">
+                                <span class="history-label">Typing Sessions:</span>
+                                <span class="history-value" id="typingSessions">0</span>
+                            </div>
+                            <div class="history-stat">
+                                <span class="history-label">Total Typed:</span>
+                                <span class="history-value" id="totalTyped">0 chars</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline" id="resetHistoryBtn">
+                            <i class="fas fa-history"></i> Reset History
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <h2 class="section-title">About This Tool</h2>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <h3>Real-time Text Analysis with Debouncing</h3>
+                        <p>This character counter demonstrates the power of debouncing in real-time applications. Instead of updating statistics on every keystroke (which can cause performance issues), we use debouncing to update only after the user has stopped typing for a specified delay.</p>
+                        
+                        <div class="about-features">
+                            <div class="about-feature">
+                                <i class="fas fa-code"></i>
+                                <div>
+                                    <h4>Built with Vanilla JavaScript</h4>
+                                    <p>No frameworks or libraries - pure JavaScript implementation for optimal performance.</p>
+                                </div>
+                            </div>
+                            <div class="about-feature">
+                                <i class="fasfa-rocket"></i>
+                                <div>
+                                    <h4>Performance Optimized</h4>
+                                    <p>Debounced updates, efficient algorithms, and minimal DOM manipulation.</p>
+                                </div>
+                            </div>
+                            <div class="about-feature">
+                                <i class="fas fa-mobile-alt"></i>
+                                <div>
+                                    <h4>Fully Responsive</h4>
+                                    <p>Works perfectly on desktop, tablet, and mobile devices.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-tech">
+                        <h3>Technology Used</h3>
+                        <div class="tech-stack">
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-html5"></i>
+                                </div>
+                                <span>HTML5</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-css3-alt"></i>
+                                </div>
+                                <span>CSS3</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-js"></i>
+                                </div>
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <span>Chart.js</span>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-microphone"></i>
+                                </div>
+                                <span>Web Speech API</span>
+                            </div>
+                        </div>
+                        
+                        <div class="code-example">
+                            <h4>Debouncing Implementation</h4>
+                            <pre><code>function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-text-height"></i>
+                        <h3>CharCounter</h3>
+                    </div>
+                    <p>A powerful real-time character counter with debounced updates for optimal performance.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-codepen"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#counter">Character Counter</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#stats">Statistics</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#" id="apiDocs">API Documentation</a></li>
+                        <li><a href="#" id="githubRepo">GitHub Repository</a></li>
+                        <li><a href="#" id="reportIssue">Report Issue</a></li>
+                        <li><a href="#" id="suggestFeature">Suggest Feature</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Settings</h3>
+                    <div class="footer-settings">
+                        <div class="setting-item">
+                            <span>Theme:</span>
+                            <div class="theme-switch">
+                                <button class="theme-option active" data-theme="light">
+                                    <i class="fas fa-sun"></i> Light
+                                </button>
+                                <button class="theme-option" data-theme="dark">
+                                    <i class="fas fa-moon"></i> Dark
+                                </button>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <span>Debounce Delay:</span>
+                            <div class="delay-display">
+                                <span id="footerDebounceValue">50ms</span>
+                                <button class="btn-reset" id="resetDebounceBtn">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 CharCounter. All rights reserved. | Built with <i class="fas fa-heart"></i> for developers</p>
+                <div class="footer-stats">
+                    <span id="liveCharCount">0</span> characters analyzed in real-time
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle"></i>
+            <span class="toast-message">Operation completed successfully!</span>
+        </div>
+        <button class="toast-close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Share Modal -->
+    <div class="modal" id="shareModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Share Statistics</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="share-options">
+                    <button class="share-option" data-platform="twitter">
+                        <i class="fab fa-twitter"></i>
+                        <span>Twitter</span>
+                    </button>
+                    <button class="share-option" data-platform="facebook">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>Facebook</span>
+                    </button>
+                    <button class="share-option" data-platform="linkedin">
+                        <i class="fab fa-linkedin-in"></i>
+                        <span>LinkedIn</span>
+                    </button>
+                    <button class="share-option" data-platform="copy">
+                        <i class="fas fa-copy"></i>
+                        <span>Copy Link</span>
+                    </button>
+                </div>
+                <div class="share-text">
+                    <label for="shareText">Share Text:</label>
+                    <textarea id="shareText" rows="3" readonly>I just analyzed my text with CharCounter! Check out these stats:</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Chart.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
