@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator | JavaScript Fundamentals - Day 7</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-weight-scale"></i> BMI Calculator</h1>
+            <p class="subtitle">JavaScript Fundamentals - Day 7 Project</p>
+            <p class="description">Body Mass Index (BMI) is a measure of body fat based on your weight in relation to your height.</p>
+        </header>
+
+        <main>
+            <div class="calculator-container">
+                <div class="input-section">
+                    <h2><i class="fas fa-calculator"></i> Calculate Your BMI</h2>
+                    
+                    <div class="measurement-system">
+                        <div class="system-selector">
+                            <button id="metric-btn" class="system-btn active">Metric (kg, cm)</button>
+                            <button id="imperial-btn" class="system-btn">Imperial (lbs, inches)</button>
+                        </div>
+                    </div>
+
+                    <!-- Metric System Inputs -->
+                    <div id="metric-inputs" class="input-group">
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label for="height-cm"><i class="fas fa-ruler-vertical"></i> Height (cm)</label>
+                                <input type="number" id="height-cm" min="50" max="250" step="0.1" placeholder="e.g., 175">
+                                <div class="range-container">
+                                    <input type="range" id="height-cm-range" min="50" max="250" value="175" class="range-slider">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label for="weight-kg"><i class="fas fa-weight-hanging"></i> Weight (kg)</label>
+                                <input type="number" id="weight-kg" min="10" max="200" step="0.1" placeholder="e.g., 70">
+                                <div class="range-container">
+                                    <input type="range" id="weight-kg-range" min="10" max="200" value="70" class="range-slider">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imperial System Inputs (hidden by default) -->
+                    <div id="imperial-inputs" class="input-group" style="display: none;">
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label for="height-ft"><i class="fas fa-ruler-vertical"></i> Height (feet)</label>
+                                <input type="number" id="height-ft" min="3" max="8" placeholder="e.g., 5">
+                            </div>
+                            <div class="input-field">
+                                <label for="height-in"><i class="fas fa-ruler"></i> Height (inches)</label>
+                                <input type="number" id="height-in" min="0" max="11" placeholder="e.g., 9">
+                            </div>
+                        </div>
+                        
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label for="weight-lbs"><i class="fas fa-weight-hanging"></i> Weight (lbs)</label>
+                                <input type="number" id="weight-lbs" min="50" max="440" step="0.1" placeholder="e.g., 154">
+                                <div class="range-container">
+                                    <input type="range" id="weight-lbs-range" min="50" max="440" value="154" class="range-slider">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="button-container">
+                        <button id="calculate-btn" class="btn calculate-btn">
+                            <i class="fas fa-calculator"></i> Calculate BMI
+                        </button>
+                        <button id="reset-btn" class="btn reset-btn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+
+                <div class="result-section">
+                    <h2><i class="fas fa-chart-line"></i> Your Result</h2>
+                    
+                    <div class="bmi-display">
+                        <div class="bmi-value-container">
+                            <div class="bmi-label">Your BMI</div>
+                            <div id="bmi-value" class="bmi-value">--</div>
+                            <div id="bmi-category" class="bmi-category">Enter your details</div>
+                        </div>
+                        
+                        <div class="bmi-meter">
+                            <div class="meter-scale">
+                                <div class="scale-label underweight">Underweight</div>
+                                <div class="scale-label normal">Normal</div>
+                                <div class="scale-label overweight">Overweight</div>
+                                <div class="scale-label obese">Obese</div>
+                            </div>
+                            <div class="meter-bar">
+                                <div class="meter-fill">
+                                    <div id="bmi-indicator" class="bmi-indicator"></div>
+                                </div>
+                            </div>
+                            <div class="scale-numbers">
+                                <span>0</span>
+                                <span>18.5</span>
+                                <span>25</span>
+                                <span>30</span>
+                                <span>40+</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="health-info">
+                        <h3><i class="fas fa-heartbeat"></i> Health Information</h3>
+                        <p id="health-message">Your health message will appear here after calculation.</p>
+                        
+                        <div class="bmi-categories">
+                            <div class="category-card">
+                                <div class="category-color underweight"></div>
+                                <div class="category-text">
+                                    <strong>Underweight</strong>
+                                    <span>BMI &lt; 18.5</span>
+                                </div>
+                            </div>
+                            <div class="category-card">
+                                <div class="category-color normal"></div>
+                                <div class="category-text">
+                                    <strong>Normal weight</strong>
+                                    <span>BMI 18.5 - 24.9</span>
+                                </div>
+                            </div>
+                            <div class="category-card">
+                                <div class="category-color overweight"></div>
+                                <div class="category-text">
+                                    <strong>Overweight</strong>
+                                    <span>BMI 25 - 29.9</span>
+                                </div>
+                            </div>
+                            <div class="category-card">
+                                <div class="category-color obese"></div>
+                                <div class="category-text">
+                                    <strong>Obese</strong>
+                                    <span>BMI ≥ 30</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2><i class="fas fa-info-circle"></i> About BMI</h2>
+                <div class="info-cards">
+                    <div class="info-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>What is BMI?</h3>
+                        <p>Body Mass Index (BMI) is a person's weight in kilograms divided by the square of height in meters. It's an inexpensive screening method for weight category.</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Limitations</h3>
+                        <p>BMI doesn't account for muscle mass, bone density, overall body composition, and racial/sex differences. It's a general indicator, not a diagnostic tool.</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-user-md"></i>
+                        <h3>Medical Advice</h3>
+                        <p>If you have concerns about your BMI or weight, consult with a healthcare provider who can perform a comprehensive health assessment.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>BMI Calculator | JavaScript Fundamentals - Day 7 Project</p>
+            <p class="footer-links">
+                <a href="https://github.com/priyabariya83/bmi-calculator" id="view-code"><i class="fab fa-github"></i> View Code</a>
+                <a href="#" id="toggle-theme"><i class="fas fa-moon"></i> Dark Mode</a>
+            </p>
+            <p class="copyright">Created with <i class="fas fa-heart"></i> by a JavaScript learner</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
