@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Digital Clock | Indian Timezones | 8 Feb 2026</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+        <div class="shooting-stars"></div>
+        <div class="nebula"></div>
+        <div class="grid-overlay"></div>
+        <div class="glow-orb" style="--x: 20%; --y: 30%;"></div>
+        <div class="glow-orb" style="--x: 80%; --y: 70%;"></div>
+        <div class="glow-orb" style="--x: 40%; --y: 80%;"></div>
+        <div class="particles-container"></div>
+    </div>
+
+    <!-- Floating Elements -->
+    <div class="floating-elements">
+        <div class="floating-clock"></div>
+        <div class="floating-map"></div>
+        <div class="floating-gear"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-gradient">
+                <div class="header-content">
+                    <div class="logo-container">
+                        <div class="logo-circle">
+                            <i class="fas fa-clock logo-icon"></i>
+                            <div class="logo-ring"></div>
+                        </div>
+                        <div class="logo-text">
+                            <h1 class="logo-title">भारत डिजिटल घड़ी</h1>
+                            <p class="logo-subtitle">India Digital Clock</p>
+                        </div>
+                    </div>
+                    
+                    <div class="current-date">
+                        <div class="date-card">
+                            <div class="date-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="date-details">
+                                <span class="day-name">SUNDAY</span>
+                                <span class="date-number">8</span>
+                                <span class="month-year">FEBRUARY 2026</span>
+                            </div>
+                        </div>
+                        <div class="stats-card">
+                            <div class="stat">
+                                <span class="stat-label">Day</span>
+                                <span class="stat-value" id="day-of-year">039</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Week</span>
+                                <span class="stat-value" id="week-number">06</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">TZ</span>
+                                <span class="stat-value" id="tz-count">15</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-ribbon">
+                    <marquee behavior="scroll" direction="left">
+                        <span class="ribbon-text">🌏 INDIAN STANDARD TIME (IST) UTC+5:30 • 🇮🇳 SUNDAY, 8 FEBRUARY 2026 • ⏰ REAL-TIME UPDATING • 🎯 PRECISION CLOCK • 📍 ALL INDIAN REGIONS • 🌟 ADVANCED FEATURES</span>
+                    </marquee>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Clock Section -->
+        <main class="main-content">
+            <section class="hero-section">
+                <div class="clock-container">
+                    <div class="digital-clock-wrapper">
+                        <!-- Clock Glow Effect -->
+                        <div class="clock-glow"></div>
+                        <div class="clock-glow2"></div>
+                        
+                        <!-- Main Clock -->
+                        <div class="digital-clock" id="digital-clock">
+                            <div class="time-display">
+                                <span class="time-unit hours" id="hours">00</span>
+                                <span class="time-separator blink">:</span>
+                                <span class="time-unit minutes" id="minutes">00</span>
+                                <span class="time-separator blink">:</span>
+                                <span class="time-unit seconds" id="seconds">00</span>
+                                <span class="time-suffix" id="ampm">AM</span>
+                                <span class="milliseconds" id="milliseconds">.000</span>
+                            </div>
+                            <div class="clock-info">
+                                <div class="timezone-display">
+                                    <i class="fas fa-globe-asia"></i>
+                                    <span id="current-timezone">INDIAN STANDARD TIME</span>
+                                    <span class="utc-badge" id="utc-offset">UTC+05:30</span>
+                                </div>
+                                <div class="clock-meta">
+                                    <span class="meta-item">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span id="current-region">ALL INDIA</span>
+                                    </span>
+                                    <span class="meta-item">
+                                        <i class="fas fa-sun"></i>
+                                        <span id="daylight-status">NO DST</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Control Panel -->
+                    <div class="control-panel">
+                        <div class="panel-header">
+                            <h3><i class="fas fa-sliders-h"></i> CLOCK CONTROLS</h3>
+                            <div class="panel-glow"></div>
+                        </div>
+                        <div class="controls-grid">
+                            <button class="control-btn neon-btn" id="toggle-format">
+                                <i class="fas fa-exchange-alt"></i>
+                                <span>24H/12H</span>
+                                <div class="btn-glow"></div>
+                            </button>
+                            <button class="control-btn neon-btn" id="toggle-seconds">
+                                <i class="fas fa-stopwatch"></i>
+                                <span>SECONDS</span>
+                                <div class="btn-glow"></div>
+                            </button>
+                            <button class="control-btn neon-btn" id="toggle-milliseconds">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>MILLISECONDS</span>
+                                <div class="btn-glow"></div>
+                            </button>
+                            <button class="control-btn neon-btn" id="toggle-sound">
+                                <i class="fas fa-volume-up"></i>
+                                <span>SOUND</span>
+                                <div class="btn-glow"></div>
+                            </button>
+                            <button class="control-btn neon-btn" id="toggle-theme">
+                                <i class="fas fa-palette"></i>
+                                <span>THEME</span>
+                                <div class="btn-glow"></div>
+                            </button>
+                            <button class="control-btn neon-btn" id="fullscreen">
+                                <i class="fas fa-expand"></i>
+                                <span>FULLSCREEN</span>
+                                <div class="btn-glow"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timezone Selector Section -->
+            <section class="timezone-section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <div class="title-icon">
+                            <i class="fas fa-globe-asia"></i>
+                        </div>
+                        <h2>INDIAN TIMEZONE SELECTOR</h2>
+                        <p class="section-subtitle">Select any region to view local time across India</p>
+                    </div>
+                    <div class="section-actions">
+                        <button class="action-btn" id="reset-timezone">
+                            <i class="fas fa-home"></i> Reset to IST
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Timezone Cards -->
+                <div class="timezone-cards">
+                    <!-- Official Timezones -->
+                    <div class="category-section">
+                        <h3 class="category-title">
+                            <i class="fas fa-crown"></i>
+                            OFFICIAL TIMEZONE
+                            <span class="category-badge">1</span>
+                        </h3>
+                        <div class="cards-container" id="official-timezones">
+                            <!-- Official timezone cards will be populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Regional Timezones -->
+                    <div class="category-section">
+                        <h3 class="category-title">
+                            <i class="fas fa-city"></i>
+                            MAJOR INDIAN CITIES
+                            <span class="category-badge" id="regional-count">8</span>
+                        </h3>
+                        <div class="cards-container" id="regional-timezones">
+                            <!-- Regional timezone cards will be populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Neighboring Countries -->
+                    <div class="category-section">
+                        <h3 class="category-title">
+                            <i class="fas fa-users"></i>
+                            NEIGHBORING COUNTRIES
+                            <span class="category-badge" id="neighbor-count">6</span>
+                        </h3>
+                        <div class="cards-container" id="neighbor-timezones">
+                            <!-- Neighbor timezone cards will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advanced Features -->
+            <section class="advanced-section">
+                <div class="advanced-grid">
+                    <!-- Manual Adjustment -->
+                    <div class="feature-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h3>TIME ADJUSTMENT</h3>
+                            <div class="card-glow"></div>
+                        </div>
+                        <div class="card-body">
+                            <div class="adjustment-sliders">
+                                <div class="slider-container">
+                                    <div class="slider-header">
+                                        <i class="fas fa-clock"></i>
+                                        <span>HOUR OFFSET</span>
+                                        <span class="slider-value" id="hour-value">0</span>
+                                    </div>
+                                    <input type="range" class="slider" id="hour-adjust" min="-12" max="12" value="0" step="0.5">
+                                    <div class="slider-labels">
+                                        <span>-12h</span>
+                                        <span>0</span>
+                                        <span>+12h</span>
+                                    </div>
+                                </div>
+                                <div class="slider-container">
+                                    <div class="slider-header">
+                                        <i class="fas fa-hourglass-half"></i>
+                                        <span>MINUTE OFFSET</span>
+                                        <span class="slider-value" id="minute-value">0</span>
+                                    </div>
+                                    <input type="range" class="slider" id="minute-adjust" min="-59" max="59" value="0">
+                                    <div class="slider-labels">
+                                        <span>-59m</span>
+                                        <span>0</span>
+                                        <span>+59m</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="adjustment-buttons">
+                                <button class="btn-apply" id="apply-adjustment">
+                                    <i class="fas fa-check"></i> APPLY OFFSET
+                                </button>
+                                <button class="btn-reset" id="reset-adjustment">
+                                    <i class="fas fa-redo"></i> RESET
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Time Information -->
+                    <div class="feature-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <h3>TIME INFORMATION</h3>
+                            <div class="card-glow"></div>
+                        </div>
+                        <div class="card-body">
+                            <div class="info-grid">
+                                <div class="info-item highlight">
+                                    <div class="info-label">
+                                        <i class="fas fa-sun"></i>
+                                        SUNRISE
+                                    </div>
+                                    <div class="info-value" id="sunrise-time">06:45 AM</div>
+                                </div>
+                                <div class="info-item highlight">
+                                    <div class="info-label">
+                                        <i class="fas fa-moon"></i>
+                                        SUNSET
+                                    </div>
+                                    <div class="info-value" id="sunset-time">06:15 PM</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">
+                                        <i class="fas fa-calendar-day"></i>
+                                        DAY OF WEEK
+                                    </div>
+                                    <div class="info-value" id="day-week">7</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">
+                                        <i class="fas fa-history"></i>
+                                        UPTIME
+                                    </div>
+                                    <div class="info-value" id="uptime">00:00:00</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="feature-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h3>QUICK ACTIONS</h3>
+                            <div class="card-glow"></div>
+                        </div>
+                        <div class="card-body">
+                            <div class="actions-grid">
+                                <button class="action-btn quick-action" id="set-alarm">
+                                    <i class="fas fa-bell"></i>
+                                    <span>SET ALARM</span>
+                                    <div class="action-glow"></div>
+                                </button>
+                                <button class="action-btn quick-action" id="start-stopwatch">
+                                    <i class="fas fa-stopwatch"></i>
+                                    <span>STOPWATCH</span>
+                                    <div class="action-glow"></div>
+                                </button>
+                                <button class="action-btn quick-action" id="start-timer">
+                                    <i class="fas fa-hourglass-start"></i>
+                                    <span>TIMER</span>
+                                    <div class="action-glow"></div>
+                                </button>
+                                <button class="action-btn quick-action" id="share-time">
+                                    <i class="fas fa-share-alt"></i>
+                                    <span>SHARE TIME</span>
+                                    <div class="action-glow"></div>
+                                </button>
+                                <button class="action-btn quick-action" id="copy-time">
+                                    <i class="fas fa-copy"></i>
+                                    <span>COPY TIME</span>
+                                    <div class="action-glow"></div>
+                                </button>
+                                <button class="action-btn quick-action" id="save-preset">
+                                    <i class="fas fa-save"></i>
+                                    <span>SAVE PRESET</span>
+                                    <div class="action-glow"></div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Alarm Section -->
+            <div class="alarm-overlay" id="alarm-overlay">
+                <div class="alarm-modal">
+                    <div class="modal-header">
+                        <h3><i class="fas fa-bell"></i> SET ALARM</h3>
+                        <button class="modal-close" id="close-alarm">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alarm-time-input">
+                            <input type="time" id="alarm-time" value="07:00">
+                            <select id="alarm-timezone">
+                                <option value="IST">IST - Indian Standard Time</option>
+                                <option value="current">Current Timezone</option>
+                            </select>
+                        </div>
+                        <div class="alarm-actions">
+                            <button class="btn-save" id="save-alarm">
+                                <i class="fas fa-plus"></i> ADD ALARM
+                            </button>
+                            <button class="btn-cancel" id="cancel-alarm">
+                                CANCEL
+                            </button>
+                        </div>
+                        <div class="alarm-list" id="alarm-list">
+                            <!-- Alarms will appear here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <div class="footer-logo">
+                            <i class="fas fa-clock footer-clock"></i>
+                            <span>INDIAN DIGITAL CLOCK</span>
+                        </div>
+                        <p class="footer-description">
+                            Advanced digital clock with real-time Indian timezone support.
+                            Precision timing with beautiful visual effects.
+                        </p>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>STATISTICS</h4>
+                        <div class="footer-stats">
+                            <div class="footer-stat">
+                                <span class="stat-name">Precision</span>
+                                <span class="stat-value">±1ms</span>
+                            </div>
+                            <div class="footer-stat">
+                                <span class="stat-name">Timezones</span>
+                                <span class="stat-value">15</span>
+                            </div>
+                            <div class="footer-stat">
+                                <span class="stat-name">Page Load</span>
+                                <span class="stat-value" id="page-load-time">00:00:00</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>CREDITS</h4>
+                        <p class="credits">
+                            <i class="fas fa-code"></i> Coded in VS Code<br>
+                            <i class="fas fa-calendar"></i> Date: 8 February 2026<br>
+                            <i class="fas fa-map-marker-alt"></i> Reference: IST UTC+5:30
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <div class="footer-ticker">
+                        <span>🕐</span>
+                        <span>INDIAN STANDARD TIME</span>
+                        <span>•</span>
+                        <span>SUNDAY, 8 FEBRUARY 2026</span>
+                        <span>•</span>
+                        <span>REAL-TIME UPDATING</span>
+                        <span>•</span>
+                        <span>ADVANCED VISUAL EFFECTS</span>
+                    </div>
+                    <div class="copyright">
+                        © 2026 Indian Digital Clock | Designed with advanced CSS animations
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Audio Elements -->
+    <audio id="tick-sound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-clock-ticking-close-up-1001.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="click-sound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="alarm-sound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
